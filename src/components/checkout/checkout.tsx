@@ -25,7 +25,7 @@ class Checkout extends React.Component<CheckoutInterface> {
       try {
         await axios
           .post(
-            "/functions/index",
+            "/.netlify/functions/index",
             {
               stripeEmail: this.props.email,
               stripeAmt: Math.floor(CartTotal(this.props.cart) * 100),

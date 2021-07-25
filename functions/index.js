@@ -66,7 +66,7 @@ exports.handler = async (event, context) => {
       statusCode: 200,
       headers,
       body: JSON.stringify({
-        status: "it works! beep boop",
+        status: "it works!",
       }),
     }
   } catch (err) {
