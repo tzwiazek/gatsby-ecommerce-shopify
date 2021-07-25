@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "gatsby-ecommerce-test",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Test",
   "version": "0.1.0",
-  "author": "ssss",
+  "author": "Tomasz Związek",
   "dependencies": {
     "@chec/gatsby-source-chec": "^1.2.0",
     "babel-plugin-styled-components": "^1.12.0",

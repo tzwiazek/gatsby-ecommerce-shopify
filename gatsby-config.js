@@ -4,9 +4,9 @@ require('dotenv').config({ path: `.env.${activeEnv}` });
 
 module.exports = {
   siteMetadata: {
-    title: `...`,
+    title: `Gatsby ecommerce`,
     description: `...`,
-    author: `...`,
+    author: `Tomasz Związek`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
