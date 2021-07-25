@@ -3,10 +3,10 @@ import { Link } from "gatsby";
 import { CartContext, CartContextType } from "../cart/cart-provider";
 import Card from "./checkout-payment";
 import Seo from "../seo";
-import { Table, TR, TH, TD, Payment } from "../../pages/checkout.styles";
 import { CartTotal } from "../../shared/hooks/cart-total";
 import { CartInterface } from "../../shared/interfaces/components/cart.interface";
 import { ProductName } from "../products/product/product.styles";
+import { Table, TR, TH, TD, Payment } from "./checkout.styles";
 
 const CartDisplay = () => {
   const [cart]: CartContextType = useContext(CartContext)
