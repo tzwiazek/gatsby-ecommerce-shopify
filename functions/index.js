@@ -2,7 +2,7 @@ const activeEnv =
 process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development"
 require('dotenv').config({ path: `.env.${activeEnv}` });
 
-const stripe = "pk_test_51J4opuDC7y7WZSIzduurTII5oItC72Ma5VOXcBzzPMt75YAL60nu6zCFlOD5a8uLZ2SOx6pF5ZervT8HwGG6o1FF00DQyH2MhE",
+const stripe = "process.env.STRIPE_SECRET_KEY",
   headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type",
