@@ -1,7 +1,40 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/node-apis/
- */
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
 
-// You can delete this file if you're not using it
+  const { data: { allChecCategory } } = await graphql(`
+    {
+      allChecCategory {
+        nodes {
+          id
+          slug
+          products {
+            id
+            permalink
+          }
+        }
+      }
+    }
+  `);
+
+  allChecCategory.nodes.forEach(({ products }) => {
+    products.forEach(({ id, permalink }) =>
+      createPage({
+        path: `/${permalink}`,
+        component: require.resolve(`./src/templates/product-page/product-page.tsx`),
+        context: {
+          id
+        },
+      })
+    )
+  });
+
+  allChecCategory.nodes.forEach(({ id, slug }) =>
+    createPage({
+      path: `/${slug}`,
+      component: require.resolve(`./src/templates/category-page/category-page.tsx`),
+      context: {
+        id
+      },
+    })
+  );
+};
