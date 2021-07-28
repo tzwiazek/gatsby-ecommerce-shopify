@@ -37,8 +37,7 @@ import {
 } from "./cart.styles";
 
 const Cart = (): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [cart, updateCart, emptyCart, removeItemFromCart, changeItemQuantity]: CartContextType  = useContext(CartContext)
+  const [cart, , , removeItemFromCart, changeItemQuantity]: CartContextType  = useContext(CartContext)
   const [toggleCart, setToggleCart]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
 
   useEffect(() => {
