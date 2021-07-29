@@ -1,4 +1,4 @@
-import { CartInterface } from "../interfaces/components/cart.interface";
+import { CartInterface } from "shared/interfaces/components/cart.interface";
 
 export const CartTotal = (cart: CartInterface[]) => {
   return cart.reduce((acc: number, next: CartInterface) =>

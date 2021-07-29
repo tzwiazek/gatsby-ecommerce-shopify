@@ -1,11 +1,11 @@
 import React from "react";
 import { graphql } from "gatsby";
-import Layout from "../../components/layout/layout";
-import CategoryTitle from "../../components/categories/category-title/category-title";
-import Seo from "../../components/seo";
-import { CartInterface } from "../../shared/interfaces/components/cart.interface";
+import Layout from "components/layout/layout";
+import CategoryTitle from "components/categories/category-title/category-title";
+import Seo from "components/seo";
+import { CartInterface } from "shared/interfaces/components/cart.interface";
 import { CategoryContainer, ProductsWrapper, CollectionTitle, ProductsContainer } from "./category-page.styles";
-import Product from "../../components/products/product/product";
+import Product from "components/products/product/product";
 
 export default function CategoryPage({ data: { category } }): JSX.Element {
   const { products } = category;

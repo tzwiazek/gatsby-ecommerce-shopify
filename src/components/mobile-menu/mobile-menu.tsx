@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
-import { CartInterface } from "../../shared/interfaces/components/cart.interface";
-import { CartContext, CartContextType } from "../cart/cart-provider";
-import { HeaderService } from "../header/header.service";
+import { CartInterface } from "shared/interfaces/components/cart.interface";
+import { CartContext, CartContextType } from "components/cart/cart-provider";
+import { HeaderService } from "components/header/header.service";
 import {
   Favorite,
   Menu,
@@ -21,7 +21,7 @@ export default function MobileMenu(): JSX.Element {
   const [cartCount, updateCartCount]: [number, Dispatch<SetStateAction<number>>] = useState(0);
 
   useEffect(() => {
-    updateCartCount(cart.reduce((acc: number, next: CartInterface) => acc + next.quantity, 0))
+    updateCartCount(cart.reduce((acc: number, next: CartInterface) => acc + next.quantity, 0));
 
     if (window.pageYOffset > 60) {
       setToggleHeader(true);
@@ -31,7 +31,7 @@ export default function MobileMenu(): JSX.Element {
 
     HeaderService.toggleMenu$.subscribe((isActive: boolean) => {
       const bodyElement: HTMLElement = document.getElementsByTagName('body')[0];
-      isActive ? bodyElement.classList.add('stop-scrolling') : bodyElement.classList.remove('stop-scrolling')
+      isActive ? bodyElement.classList.add('stop-scrolling') : bodyElement.classList.remove('stop-scrolling');
 
       setToggleMenu(isActive);
     })

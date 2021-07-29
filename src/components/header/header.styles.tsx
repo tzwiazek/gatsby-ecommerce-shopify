@@ -1,11 +1,11 @@
 import React from "react";
 import styled from 'styled-components';
 import { Link } from "gatsby";
-import favoriteIcon from '../../assets/img/icons/favorite.svg';
-import shoppingBagIcon from '../../assets/img/icons/shopping-bag.svg';
-import accountIcon from '../../assets/img/icons/account.svg';
-import barsIcon from '../../assets/img/icons/menu.svg';
-import device from "../../shared/responsive/Device";
+import favoriteIcon from 'assets/img/icons/favorite.svg';
+import shoppingBagIcon from 'assets/img/icons/shopping-bag.svg';
+import accountIcon from 'assets/img/icons/account.svg';
+import barsIcon from 'assets/img/icons/menu.svg';
+import device from "shared/responsive/Device";
 import {
   CountInterface,
   HeaderElementInterface,
@@ -18,7 +18,7 @@ import {
   MenuLinkInterface,
   NavInterface,
   SiteBrandingInterface
-} from "../../shared/interfaces/components/header.interface";
+} from "shared/interfaces/components/header.interface";
 
 export const HeaderElement = styled.header<HeaderElementInterface>`
   width:100%;

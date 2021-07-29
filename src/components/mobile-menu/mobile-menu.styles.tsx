@@ -11,7 +11,7 @@ import {
   MenuInterface,
   NavInterface,
   TextInterface
-} from "../../shared/interfaces/components/mobile-menu.interface";
+} from "shared/interfaces/components/mobile-menu.interface";
 
 export const Nav = styled.nav<NavInterface>`
   margin-top:80px;

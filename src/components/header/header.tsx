@@ -1,10 +1,22 @@
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
-import { HeaderElement, LogoLink, Menu, MenuElement, MenuLink, Nav, SiteBranding, LogoImg, MenuIcon, Count, MenuCart } from "./header.styles";
-import logoSVG from '../../assets/img/azavo-logo.svg';
+import {
+  HeaderElement,
+  LogoLink,
+  Menu,
+  MenuElement,
+  MenuLink,
+  Nav,
+  SiteBranding,
+  LogoImg,
+  MenuIcon,
+  Count,
+  MenuCart
+} from "./header.styles";
+import logoSVG from 'assets/img/azavo-logo.svg';
 import { HeaderService } from "./header.service";
 import { isMobile } from "react-device-detect";
-import { CartContext, CartContextType } from "../cart/cart-provider";
-import { CartInterface } from "../../shared/interfaces/components/cart.interface";
+import { CartContext, CartContextType } from "components/cart/cart-provider";
+import { CartInterface } from "shared/interfaces/components/cart.interface";
 
 export default function Header(): JSX.Element {
   const [isActiveMobileMenu, setActiveMobileMenu]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);

@@ -1,5 +1,5 @@
-import { DeviceSizeInterface } from "../interfaces/deviceSize.interface";
-import { DeviceSize } from "../enums/deviceSize.enum";
+import { DeviceSizeInterface } from "shared/interfaces/deviceSize.interface";
+import { DeviceSize } from "shared/enums/deviceSize.enum";
 
 const device: DeviceSizeInterface = {
   mobileS: `(min-width: ${DeviceSize.mobileS})`,

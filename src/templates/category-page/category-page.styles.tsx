@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import device from "../../shared/responsive/Device";
+import device from "shared/responsive/Device";
 
 export const CategoryContainer = styled.div<any>`
   width:100%;

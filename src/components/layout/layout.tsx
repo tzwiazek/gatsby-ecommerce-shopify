@@ -1,11 +1,11 @@
 import React, { useEffect, SetStateAction, Dispatch, useState } from "react";
-import Header from "../header/header";
-import Notifications from "../header/notifications/notifications";
+import Header from "components/header/header";
+import Notifications from "components/header/notifications/notifications";
 import { isMobile } from "react-device-detect";
-import MobileMenu from "../mobile-menu/mobile-menu";
+import MobileMenu from "components/mobile-menu/mobile-menu";
 import styled from "styled-components";
-import device from "../../shared/responsive/Device";
-import Cart from "../cart/cart";
+import device from "shared/responsive/Device";
+import Cart from "components/cart/cart";
 
 const HeaderContainer = styled.div<any>`
   margin-top:0px;

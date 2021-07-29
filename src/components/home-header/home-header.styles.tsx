@@ -11,8 +11,8 @@ import {
   ButtonInterface,
   ButtonLinkInterface,
   TextInterface
-} from "../../shared/interfaces/components/home-header.interface";
-import device from "../../shared/responsive/Device";
+} from "shared/interfaces/components/home-header.interface";
+import device from "shared/responsive/Device";
 
 export const HeaderWrapper = styled.div<HeaderWrapperInterface>`
   width:100%;

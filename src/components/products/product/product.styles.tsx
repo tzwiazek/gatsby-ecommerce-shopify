@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import styled from 'styled-components';
-import device from "../../../shared/responsive/Device";
+import device from "shared/responsive/Device";
 
 export const ProductContainer = styled.li<any>`
   display:flex;

@@ -1,10 +1,10 @@
-import React from "react"
-import { Link } from "gatsby"
-import SEO from "../components/seo"
-import Layout from "../components/layout/layout"
-import CartDisplay from "../components/checkout/checkout-cart"
-import { CartUIProvider, CartUIContext } from "../components/cart/cartUI"
-import { Loading, Success } from "../components/checkout/checkout.styles"
+import React from "react";
+import { Link } from "gatsby";
+import SEO from "components/seo";
+import Layout from "components/layout/layout";
+import CartDisplay from "components/checkout/checkout-cart";
+import { CartUIProvider, CartUIContext } from "components/cart/cartUI";
+import { Loading, Success } from "components/checkout/checkout.styles";
 
 function displayCartUIContext(context: string): JSX.Element {
   if (context === "checkout") {
