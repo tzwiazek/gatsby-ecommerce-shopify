@@ -37,13 +37,21 @@ import {
 } from "./cart.styles";
 
 const Cart = (): JSX.Element => {
-  const [cart, , , removeItemFromCart, changeItemQuantity]: CartContextType  = useContext(CartContext)
+  const [cart, , , removeItemFromCart, changeItemQuantity]: CartContextType  = useContext(CartContext);
   const [toggleCart, setToggleCart]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
 
   useEffect(() => {
+    let isCartMount = false;
+
     HeaderService.toggleCart$.subscribe((isActive: boolean) => {
-      setToggleCart(isActive);
+      if (!isCartMount) {
+        setToggleCart(isActive);
+      }
     });
+
+    return () => {
+      isCartMount = true
+    };
   }, []);
 
   return(

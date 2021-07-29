@@ -31,7 +31,7 @@ const Payment = () => {
         Test using this credit card:
         <span className="cc-number"> 4242 4242 4242 4242</span>, and enter any 5 digits for the zip code
       </small>
-      <StripeProvider apiKey="sk_test_51J4opuDC7y7WZSIz6ckMLDu0wP8Gb5CpIryFr6ybDikweAj5Juc07lHoEWX0Bj2QZVJkmdH7xhYsFny8LuSqSCvg00ZZRvZ1Qi">
+      <StripeProvider apiKey="pk_test_51J4opuDC7y7WZSIzduurTII5oItC72Ma5VOXcBzzPMt75YAL60nu6zCFlOD5a8uLZ2SOx6pF5ZervT8HwGG6o1FF00DQyH2MhE">
         <Elements>
           <Checkout
             updateComplete={updateComplete}

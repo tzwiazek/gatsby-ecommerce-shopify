@@ -5,29 +5,30 @@ import { CartContext, CartContextType } from "components/cart/cart-provider";
 import { HeaderService } from "components/header/header.service";
 import Layout from "components/layout/layout";
 import { GatsbyImage } from "gatsby-plugin-image";
+import { CartInterface } from "shared/interfaces/components/cart.interface";
 
 export default function ProductPage({ data: { product } }) {
   const [mainImage] = product.images;
   const [quantity]: [number, Dispatch<SetStateAction<number>>] = useState(1);
-  const [cart, setCart]: CartContextType = useContext(CartContext);
+  const [cart, setCart, , , changeItemQuantity]: CartContextType = useContext(CartContext);
 
   const addToCart = () => {
-    const tempCart = [...cart];
+    const tempCart: CartInterface[] = cart;
     let itemFound = false;
 
     tempCart.forEach(el => {
       if (el.id === product.id) {
-        el.quantity += quantity;
-        itemFound = true;
+        changeItemQuantity(product.id, +1)
+        itemFound = true
       }
     })
 
     if (!itemFound) {
-      product.quantity = quantity;
-      tempCart.push(product);
+      product.quantity = quantity
+      tempCart.push(product)
+      setCart(tempCart);
+      reactLocalStorage.setObject("cart", tempCart);
     }
-    setCart(tempCart);
-    reactLocalStorage.setObject("cart", tempCart);
     HeaderService.toggleCart$.next(true);
   }
 

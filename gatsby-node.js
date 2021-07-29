@@ -10,6 +10,12 @@ exports.createPages = async ({ graphql, actions }) => {
           products {
             id
             permalink
+            variant_groups {
+              name
+              options {
+                name
+              }
+            }
           }
         }
       }
