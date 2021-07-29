@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import device from "../../../shared/responsive/Device";
+import device from "shared/responsive/Device";
 
 export const HeaderTitleWrapper = styled.header<any>`
   width:100%;

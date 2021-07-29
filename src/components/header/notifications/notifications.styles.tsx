@@ -7,8 +7,8 @@ import {
   NotificationLinkInterface,
   SwipeWrapInterface,
   TextInterface
-} from "../../../shared/interfaces/components/notification.interface";
-import device from "../../../shared/responsive/Device";
+} from "shared/interfaces/components/notification.interface";
+import device from "shared/responsive/Device";
 
 export const HeaderSwipe = styled.div<HeaderSwipeInterface>`
   position:fixed;

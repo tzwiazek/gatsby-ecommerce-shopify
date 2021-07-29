@@ -1,6 +1,16 @@
 import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
-import { HeaderWrapper, PictureContainer, HeaderContainer, HeaderBox, TitleContainer, Title, Text, Button, ButtonLink } from "./home-header.styles";
+import {
+  HeaderWrapper,
+  PictureContainer,
+  HeaderContainer,
+  HeaderBox,
+  TitleContainer,
+  Title,
+  Text,
+  Button,
+  ButtonLink
+} from "./home-header.styles";
 import { isMobile } from "react-device-detect";
 
 export default function HomeHeader(): JSX.Element {

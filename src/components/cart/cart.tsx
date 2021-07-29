@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction, useContext, useState, useEffect }  from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
-import { CartTotal } from "../../shared/hooks/cart-total";
-import { CartInterface } from "../../shared/interfaces/components/cart.interface";
-import { HeaderService } from "../header/header.service";
+import { CartTotal } from "shared/hooks/cart-total";
+import { CartInterface } from "shared/interfaces/components/cart.interface";
+import { HeaderService } from "components/header/header.service";
 import { CartContext, CartContextType } from "./cart-provider";
 import {
   CartWrapper,

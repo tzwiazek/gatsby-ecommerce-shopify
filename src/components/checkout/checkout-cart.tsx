@@ -1,15 +1,15 @@
-import React, { useContext } from "react"
+import React, { useContext } from "react";
 import { Link } from "gatsby";
-import { CartContext, CartContextType } from "../cart/cart-provider";
+import { CartContext, CartContextType } from "components/cart/cart-provider";
 import Card from "./checkout-payment";
-import Seo from "../seo";
-import { CartTotal } from "../../shared/hooks/cart-total";
-import { CartInterface } from "../../shared/interfaces/components/cart.interface";
-import { ProductName } from "../products/product/product.styles";
+import Seo from "components/seo";
+import { CartTotal } from "shared/hooks/cart-total";
+import { CartInterface } from "shared/interfaces/components/cart.interface";
+import { ProductName } from "components/products/product/product.styles";
 import { Table, TR, TH, TD, Payment } from "./checkout.styles";
 
 const CartDisplay = () => {
-  const [cart]: CartContextType = useContext(CartContext)
+  const [cart]: CartContextType = useContext(CartContext);
   return <>{cart.length > 0 ? CheckoutDisplay(cart) : cartEmpty()}</>
 }
 

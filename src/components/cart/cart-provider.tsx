@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { reactLocalStorage } from "reactjs-localstorage";
-import { CartInterface } from "../../shared/interfaces/components/cart.interface";
+import { CartInterface } from "shared/interfaces/components/cart.interface";
 
 export type CartContextType = [
   CartInterface[],

@@ -2,8 +2,8 @@ import React from "react"
 import { injectStripe } from "react-stripe-elements"
 import axios from "axios"
 import { v4 as uuidv4 } from 'uuid';
-import { CartTotal } from "../../shared/hooks/cart-total";
-import { CartInterface } from "../../shared/interfaces/components/cart.interface";
+import { CartTotal } from "shared/hooks/cart-total";
+import { CartInterface } from "shared/interfaces/components/cart.interface";
 import { CardElementStyled } from "./checkout.styles";
 
 interface CheckoutInterface {

@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
-import leftArrow from '../../../assets/img/icons/left-arrow-white.svg';
-import rightArrow from '../../../assets/img/icons/right-arrow-white.svg';
-import plus from '../../../assets/img/icons/plus.svg';
+import leftArrow from 'assets/img/icons/left-arrow-white.svg';
+import rightArrow from 'assets/img/icons/right-arrow-white.svg';
+import plus from 'assets/img/icons/plus.svg';
 import { isMobile } from "react-device-detect";
 import { HeaderSwipe, SwipeWrap, Notification, Text, NotificationLink, Arrow, ArrowIcon } from "./notifications.styles";
 

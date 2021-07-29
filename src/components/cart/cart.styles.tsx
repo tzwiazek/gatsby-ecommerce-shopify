@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "gatsby";
 import styled from 'styled-components';
-import device from "../../shared/responsive/Device";
-import emptyCart from "../../assets/img/empty-cart.png";
-import garbage from "../../assets/img/icons/garbage.png";
+import device from "shared/responsive/Device";
+import emptyCart from "assets/img/empty-cart.png";
+import garbage from "assets/img/icons/garbage.png";
 
 export const CartWrapper = styled.div<any>`
   width:100%;

@@ -16,7 +16,12 @@ import {
   ColorContainer
 } from "./product.styles";
 import { GatsbyImage } from "gatsby-plugin-image";
-import { CartInterface, ImagesSharpInterface, VariantGroups, VariantGroupsOptions } from "../../../shared/interfaces/components/cart.interface";
+import {
+  CartInterface,
+  ImagesSharpInterface,
+  VariantGroups,
+  VariantGroupsOptions
+} from "shared/interfaces/components/cart.interface";
 
 const Product = ({product}: {product: CartInterface}) => {
   const images: ImagesSharpInterface[] = product.images;
