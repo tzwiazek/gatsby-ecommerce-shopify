@@ -9,7 +9,7 @@ const Payment = () => {
   const [email, updateEmail]: [string, Dispatch<SetStateAction<string>>] = useState("");
   const [complete, updateComplete]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
   const [cart, , emptyCart]: CartContextType = useContext(CartContext);
-  const [updateCartUI]: [string, React.Dispatch<React.SetStateAction<string>>] = useContext(CartUIContext);
+  const [cartUIStatus, updateCartUI]: [string, React.Dispatch<React.SetStateAction<string>>] = useContext(CartUIContext);
 
   return (
     <CardStyled>
@@ -48,26 +48,15 @@ const Payment = () => {
 }
 
 const Failure = () => {
-  return (
-    <>
-      <h3>Oh No!</h3>
-      <p>Something went wrong!</p>
-      <button>Please try again</button>
-    </>
-  )
+  return <h3>Something went wrong!</h3>
 }
 
 const Loading = () => {
-  return (
-    <>
-      <h4>Please hold, we are filling up your cart with goodies</h4>
-      <p>Placeholder image</p>
-    </>
-  )
+  return <h3>Loading...</h3>
 }
 
 const Success = () => {
-  return <h4>Success!</h4>
+  return <h3>Success!</h3>
 }
 
 const Card = () => {
