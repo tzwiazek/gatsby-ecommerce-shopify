@@ -8,7 +8,7 @@ An unfinished e-commerce project, made to learn gatsby.
 - Typescript
 - Styled-components
 - SASS
-- rxjs (for test)
+- rxjs (for tests)
 - prettier
 - eslint
 - tsconfig

@@ -6,6 +6,7 @@ import MobileMenu from 'src/components/mobile-menu/mobile-menu';
 import styled from 'styled-components';
 import device from 'src/shared/responsive/Device';
 import Cart from 'src/components/cart/cart';
+import 'assets/styles/globalStyles.css';
 
 const HeaderContainer = styled.div<any>`
   margin-top: 0px;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { injectStripe } from 'react-stripe-elements';
+import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { CartTotal } from 'src/shared/hooks/cart-total';
@@ -13,22 +13,31 @@ interface CheckoutInterface {
   emptyCart: () => void;
   updateCartUI: any;
   updateComplete: React.Dispatch<React.SetStateAction<boolean>>;
-  elements: any;
-  stripe: any;
 }
 
-class Checkout extends React.Component<CheckoutInterface> {
-  handleSubmit = (event: React.MouseEvent<HTMLElement>) => {
-    event.preventDefault();
+const Checkout = ({
+  cart,
+  complete,
+  email,
+  emptyCart,
+  updateCartUI,
+  updateComplete
+}: CheckoutInterface) => {
+  const stripe = useStripe();
+  const elements = useElements();
 
-    this.props.stripe.createToken().then(async () => {
+  const handleSubmit = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    const cardElement = elements!.getElement(CardElement);
+
+    stripe!.createToken(cardElement!).then(async () => {
       try {
         await axios
           .post(
             '/.netlify/functions/index',
             {
-              stripeEmail: this.props.email,
-              stripeAmt: Math.floor(CartTotal(this.props.cart) * 100),
+              stripeEmail: email,
+              stripeAmt: Math.floor(CartTotal(cart) * 100),
               stripeToken: 'tok_visa',
               stripeIdempotency: uuidv4()
             },
@@ -40,37 +49,35 @@ class Checkout extends React.Component<CheckoutInterface> {
           )
           .then((res) => {
             if (res.status === 200) {
-              this.props.updateCartUI('success');
-              setTimeout(() => this.props.emptyCart(), 3000);
+              updateCartUI('success');
+              setTimeout(() => emptyCart(), 3000);
             } else {
-              this.props.updateCartUI('failure');
-              setTimeout(() => this.props.updateCartUI('checkout'), 3000);
+              updateCartUI('failure');
+              setTimeout(() => updateCartUI('checkout'), 3000);
             }
             console.log(JSON.stringify(res, null, 2));
           });
       } catch (err) {
         console.log(err);
-        this.props.updateCartUI('failure');
+        updateCartUI('failure');
       }
     });
   };
 
-  render() {
-    return (
-      <>
-        <CardElementStyled
-          onChange={(event) => this.props.updateComplete(event.complete)}
-          style={{ base: { fontSize: '16px' } }}
-        />
-        <button
-          onClick={this.handleSubmit}
-          className="pay-with-stripe button"
-          disabled={!this.props.complete || !this.props.email}>
-          Pay with credit card
-        </button>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <CardElementStyled
+        onChange={(event) => updateComplete(event.complete)}
+        style={{ base: { fontSize: '16px' } }}
+      />
+      <button
+        onClick={handleSubmit}
+        className="pay-with-stripe button"
+        disabled={!complete || !email}>
+        Pay with credit card
+      </button>
+    </>
+  );
+};
 
-export default injectStripe(Checkout);
+export default Checkout;

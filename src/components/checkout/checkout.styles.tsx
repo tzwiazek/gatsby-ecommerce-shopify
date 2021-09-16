@@ -1,4 +1,4 @@
-import { CardElement } from 'react-stripe-elements';
+import { CardElement } from '@stripe/react-stripe-js';
 import styled from 'styled-components';
 
 export const CardElementStyled = styled(CardElement)`
