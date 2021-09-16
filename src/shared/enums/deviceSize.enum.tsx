@@ -3,7 +3,7 @@ export enum DeviceSize {
   mobileM = '375px',
   mobileL = '525px',
   tablet = '768px',
-  laptop =  '1024px',
+  laptop = '1024px',
   laptopL = '1440px',
   desktop = '1920px',
   desktopL = '2560px'

@@ -1,8 +1,19 @@
-import React from "react";
-import { HeaderTitleWrapper, HeaderTitleContainer, HeaderTitle, Text } from "./category-title.styles";
+import React from 'react';
+import {
+  HeaderTitleWrapper,
+  HeaderTitleContainer,
+  HeaderTitle,
+  Text
+} from './category-title.styles';
 
-export default function CategoryTitle({title, description}: {title: string, description: string}): JSX.Element {
-  return(
+export default function CategoryTitle({
+  title,
+  description
+}: {
+  title: string;
+  description: string;
+}): JSX.Element {
+  return (
     <>
       <HeaderTitleWrapper>
         <HeaderTitleContainer>
@@ -11,5 +22,5 @@ export default function CategoryTitle({title, description}: {title: string, desc
         </HeaderTitleContainer>
       </HeaderTitleWrapper>
     </>
-  )
+  );
 }

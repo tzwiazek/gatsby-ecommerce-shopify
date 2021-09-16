@@ -7,7 +7,7 @@ export interface MenuElementInterface {}
 export interface MenuElementLinkInterface {
   to: string;
   children: any;
-  onClick: () => void
+  onClick: () => void;
 }
 export interface MenuBottomWrapperInterface {}
 export interface MenuBottomContainerInterface {}

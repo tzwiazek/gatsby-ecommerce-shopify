@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from 'react';
 import {
   AvailableColors,
   Color,
@@ -14,42 +14,46 @@ import {
   ProductName,
   ProductPrice,
   ColorContainer
-} from "./product.styles";
-import { GatsbyImage } from "gatsby-plugin-image";
+} from './product.styles';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import {
   CartInterface,
   ImagesSharpInterface,
   VariantGroups,
   VariantGroupsOptions
-} from "shared/interfaces/components/cart.interface";
+} from 'src/shared/interfaces/components/cart.interface';
 
-const Product = ({product}: {product: CartInterface}) => {
+const Product = ({ product }: { product: CartInterface }) => {
   const images: ImagesSharpInterface[] = product.images;
-  const colors: VariantGroups[] = product.variant_groups.filter((variant) => variant.name === 'color');
-  const [currentColor, setCurrentColor]: [string, Dispatch<SetStateAction<string>>] = useState(setDefaultColor());
+  const colors: VariantGroups[] = product.variant_groups.filter(
+    (variant) => variant.name === 'color'
+  );
+  const [currentColor] = useState<string>(setDefaultColor());
 
   function setDefaultColor(): string {
     if (colors.length === 0) {
       if (images[0].name.includes('gold') && !images[0].name.includes('rose-gold')) {
         return 'gold';
       } else if (images[0].name.includes('rose-gold')) {
-        return  'rose-gold';
+        return 'rose-gold';
       } else if (images[0].name.includes('silver')) {
         return 'silver';
+      } else {
+        return 'gold';
       }
     } else {
       return colors[0].options[0].name;
     }
   }
 
-  function showHoverImage(event: { target: HTMLElement; }): void {
-    event.target.closest(PictureWrapper).children[0].classList.add('hide-image');
-    event.target.closest(PictureWrapper).children[1].classList.remove('hide-image');
+  function showHoverImage(event: { target: HTMLElement }): void {
+    event.target.closest(PictureWrapper)!.children[0].classList.add('hide-image');
+    event.target.closest(PictureWrapper)!.children[1].classList.remove('hide-image');
   }
 
-  function hideHoverImage(event: { target: HTMLElement; }): void {
-    event.target.closest(PictureWrapper).children[1].classList.add('hide-image');
-    event.target.closest(PictureWrapper).children[0].classList.remove('hide-image');
+  function hideHoverImage(event: { target: HTMLElement }): void {
+    event.target.closest(PictureWrapper)!.children[1].classList.add('hide-image');
+    event.target.closest(PictureWrapper)!.children[0].classList.remove('hide-image');
   }
 
   function displayDefaultImage(): JSX.Element | JSX.Element[] {
@@ -58,10 +62,7 @@ const Product = ({product}: {product: CartInterface}) => {
 
     if (colors.length === 0) {
       return (
-        <PictureWrapper
-          onMouseOver={showHoverImage}
-          onMouseLeave={hideHoverImage}
-        >
+        <PictureWrapper onMouseOver={showHoverImage} onMouseLeave={hideHoverImage}>
           <PictureContainer>
             <GatsbyImage image={frontImage.childImageSharp.gatsbyImageData} alt="" />
           </PictureContainer>
@@ -69,7 +70,7 @@ const Product = ({product}: {product: CartInterface}) => {
             <GatsbyImage image={backImage.childImageSharp.gatsbyImageData} alt="" />
           </PictureContainer>
         </PictureWrapper>
-      )
+      );
     } else {
       return colors[0].options.map((color, index) => {
         const frontImage: ImagesSharpInterface = findImage('front', product.images, color.name);
@@ -81,8 +82,7 @@ const Product = ({product}: {product: CartInterface}) => {
             onMouseLeave={hideHoverImage}
             key={index}
             className={index === 0 ? 'is-active' : 'hide-wrapper'}
-            data-color={color.name}
-          >
+            data-color={color.name}>
             <PictureContainer>
               <GatsbyImage image={frontImage.childImageSharp.gatsbyImageData} alt="" />
             </PictureContainer>
@@ -90,38 +90,45 @@ const Product = ({product}: {product: CartInterface}) => {
               <GatsbyImage image={backImage.childImageSharp.gatsbyImageData} alt="" />
             </PictureContainer>
           </PictureWrapper>
-        )
-      })
+        );
+      });
     }
   }
 
   function findImage(value: 'front' | 'back', images: ImagesSharpInterface[], color: string) {
     return images.filter((image: ImagesSharpInterface) => {
       if (color === 'gold') {
-        return image.name.includes(color) && !image.name.includes('rose-gold') && image.name.includes(value)
+        return (
+          image.name.includes(color) &&
+          !image.name.includes('rose-gold') &&
+          image.name.includes(value)
+        );
       } else {
-        return image.name.includes(color) && image.name.includes(value)
+        return image.name.includes(color) && image.name.includes(value);
       }
     })[0];
   }
 
-  function changeColor(event: { target: HTMLElement; }): void {
-    const parentElement: HTMLElement = event.target.parentElement;
-    const newColor: string = event.target.getAttribute('data-color');
+  function changeColor(event: { target: HTMLElement }): void {
+    const parentElement: HTMLElement = event.target.parentElement!;
+    const newColor: string = event.target.getAttribute('data-color')!;
     if (!parentElement.classList.contains('is-active')) {
-      clearActiveColor(parentElement.parentElement);
+      clearActiveColor(parentElement.parentElement!);
       parentElement.classList.add('is-active');
     }
 
-    event.target.closest(ProductContainer).querySelectorAll(PictureWrapper).forEach((item) => {
-      if (item.getAttribute('data-color') === newColor) {
-        item.classList.add('is-active');
-        item.classList.remove('hide-wrapper');
-      } else {
-        item.classList.remove('is-active');
-        item.classList.add('hide-wrapper');
-      }
-    })
+    event.target
+      .closest(ProductContainer)!
+      .querySelectorAll(PictureWrapper)
+      .forEach((item) => {
+        if (item.getAttribute('data-color') === newColor) {
+          item.classList.add('is-active');
+          item.classList.remove('hide-wrapper');
+        } else {
+          item.classList.remove('is-active');
+          item.classList.add('hide-wrapper');
+        }
+      });
 
     // to do
     // setCurrentColor(newColor);
@@ -139,17 +146,15 @@ const Product = ({product}: {product: CartInterface}) => {
         <ColorContainer className="is-active">
           <Color color={currentColor} onMouseOver={changeColor}></Color>
         </ColorContainer>
-      )
+      );
     } else {
-      return (
-        colors[0].options.map((color: VariantGroupsOptions, index: number) => {
-          return (
-            <ColorContainer className={index === 0 ? 'is-active' : ''} key={color.name}>
-              <Color data-color={color.name} color={color.name} onMouseOver={changeColor}></Color>
-            </ColorContainer>
-          )
-        })
-      )
+      return colors[0].options.map((color: VariantGroupsOptions, index: number) => {
+        return (
+          <ColorContainer className={index === 0 ? 'is-active' : ''} key={color.name}>
+            <Color data-color={color.name} color={color.name} onMouseOver={changeColor}></Color>
+          </ColorContainer>
+        );
+      });
     }
   }
 
@@ -158,15 +163,11 @@ const Product = ({product}: {product: CartInterface}) => {
       <ProductContainer>
         {/* <ProductLink to={`/${product.permalink}-${currentColor}`}> TO DO*/}
         <ProductLink to={`/${product.permalink}`}>
-          <ProductImageContainer>
-            {displayDefaultImage()}
-          </ProductImageContainer>
+          <ProductImageContainer>{displayDefaultImage()}</ProductImageContainer>
         </ProductLink>
 
         <ProductDescriptionContainer>
-          <AvailableColors>
-            {displayAvailableColors()}
-          </AvailableColors>
+          <AvailableColors>{displayAvailableColors()}</AvailableColors>
 
           <Favorite>
             <FavoriteImageContainer>
@@ -187,7 +188,7 @@ const Product = ({product}: {product: CartInterface}) => {
         </ProductDescriptionContainer>
       </ProductContainer>
     </>
-  )
-}
+  );
+};
 
 export default Product;

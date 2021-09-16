@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction, useContext, useState, useEffect }  from "react";
-import { GatsbyImage } from "gatsby-plugin-image";
-import { CartTotal } from "shared/hooks/cart-total";
-import { CartInterface } from "shared/interfaces/components/cart.interface";
-import { HeaderService } from "components/header/header.service";
-import { CartContext, CartContextType } from "./cart-provider";
+import React, { useContext, useState, useEffect } from 'react';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { CartTotal } from 'src/shared/hooks/cart-total';
+import { CartInterface } from 'src/shared/interfaces/components/cart.interface';
+import { HeaderService } from 'src/components/header/header.service';
+import { CartContext, CartContextType } from './cart-provider';
 import {
   CartWrapper,
   CloseButton,
@@ -34,11 +34,12 @@ import {
   QuantityContainer,
   Button,
   Quantity
-} from "./cart.styles";
+} from './cart.styles';
 
 const Cart = (): JSX.Element => {
-  const [cart, , , removeItemFromCart, changeItemQuantity]: CartContextType  = useContext(CartContext);
-  const [toggleCart, setToggleCart]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
+  const [cart, , , removeItemFromCart, changeItemQuantity] =
+    useContext<CartContextType>(CartContext);
+  const [toggleCart, setToggleCart] = useState<boolean>(false);
 
   useEffect(() => {
     let isCartMount = false;
@@ -50,11 +51,11 @@ const Cart = (): JSX.Element => {
     });
 
     return () => {
-      isCartMount = true
+      isCartMount = true;
     };
   }, []);
 
-  return(
+  return (
     <CartWrapper toggle={toggleCart}>
       <TitleContainer>
         <Text>Your Cart</Text>
@@ -66,42 +67,57 @@ const Cart = (): JSX.Element => {
             <EmptyCartContainer>
               <EmptyCartImage></EmptyCartImage>
               <EmptyCartText>You have no products in your cart</EmptyCartText>
-              <EmptyCartButton onClick={() => HeaderService.toggleCart$.next(false)}>Continue shopping</EmptyCartButton>
+              <EmptyCartButton onClick={() => HeaderService.toggleCart$.next(false)}>
+                Continue shopping
+              </EmptyCartButton>
             </EmptyCartContainer>
           </EmptyCartWrapper>
         ) : (
           <ProductsContainer>
             {cart.map((cartItem: CartInterface) => {
-              return(
-              <Product key={cartItem.id}>
-                <ProductImageContainer to={cartItem.permalink} onClick={() => HeaderService.toggleCart$.next(false)}>
-                  <GatsbyImage image={cartItem.images[0].childImageSharp.gatsbyImageData} alt="" />
-                </ProductImageContainer>
-                <ProductDetailsContainer>
+              return (
+                <Product key={cartItem.id}>
+                  <ProductImageContainer
+                    to={cartItem.permalink}
+                    onClick={() => HeaderService.toggleCart$.next(false)}>
+                    <GatsbyImage
+                      image={cartItem.images[0].childImageSharp.gatsbyImageData}
+                      alt=""
+                    />
+                  </ProductImageContainer>
+                  <ProductDetailsContainer>
+                    <ProductDetailsTitleContainer>
+                      <ProductDetailsTitleLink
+                        to={cartItem.permalink}
+                        onClick={() => HeaderService.toggleCart$.next(false)}>
+                        {cartItem.name}
+                      </ProductDetailsTitleLink>
+                      <RemoveProduct onClick={() => removeItemFromCart(cartItem.id)} />
+                    </ProductDetailsTitleContainer>
 
-                  <ProductDetailsTitleContainer>
-                    <ProductDetailsTitleLink to={cartItem.permalink} onClick={() => HeaderService.toggleCart$.next(false)}>{cartItem.name}</ProductDetailsTitleLink>
-                    <RemoveProduct onClick={() => removeItemFromCart(cartItem.id)} />
-                  </ProductDetailsTitleContainer>
+                    <ProductPriceContainer>
+                      <ProductPrice>
+                        {cartItem.quantity} X {cartItem.price.formatted} zł
+                      </ProductPrice>
+                    </ProductPriceContainer>
 
-                  <ProductPriceContainer>
-                    <ProductPrice>{cartItem.quantity} X {cartItem.price.formatted} zł</ProductPrice>
-                  </ProductPriceContainer>
-
-                  <QuantityContainer>
-                    <Button type="minus" onClick={() => changeItemQuantity(cartItem.id, -1)}>-</Button>
-                    <Quantity>{cartItem.quantity}</Quantity>
-                    <Button type="minus" onClick={() => changeItemQuantity(cartItem.id, +1)}>+</Button>
-                  </QuantityContainer>
-
-                </ProductDetailsContainer>
-              </Product>
-              )
+                    <QuantityContainer>
+                      <Button type="minus" onClick={() => changeItemQuantity(cartItem.id, -1)}>
+                        -
+                      </Button>
+                      <Quantity>{cartItem.quantity}</Quantity>
+                      <Button type="minus" onClick={() => changeItemQuantity(cartItem.id, +1)}>
+                        +
+                      </Button>
+                    </QuantityContainer>
+                  </ProductDetailsContainer>
+                </Product>
+              );
             })}
           </ProductsContainer>
         )}
       </CartContainer>
-      {cart.length > 0 &&
+      {cart.length > 0 && (
         <CartFooter>
           <SubtotalContainer>
             <Subtotal>
@@ -110,12 +126,14 @@ const Cart = (): JSX.Element => {
             </Subtotal>
           </SubtotalContainer>
           <CheckoutContainer>
-            <CheckoutLink to="/checkout" onClick={() => HeaderService.toggleCart$.next(false)}>go to checkout</CheckoutLink>
+            <CheckoutLink to="/checkout" onClick={() => HeaderService.toggleCart$.next(false)}>
+              go to checkout
+            </CheckoutLink>
           </CheckoutContainer>
         </CartFooter>
-      }
+      )}
     </CartWrapper>
-  )
-}
+  );
+};
 
 export default Cart;

@@ -1,14 +1,16 @@
-import React from "react"
-import Layout from "components/layout/layout"
-import Seo from "components/seo";
-import Home from "templates/home-page/home";
+import React from 'react';
+import Layout from 'src/components/layout/layout';
+import Seo from 'src/components/seo';
+import Home from 'src/templates/home-page/home';
 import 'assets/styles/globalStyles.css';
 
-export default function IndexPage(): JSX.Element {
+const IndexPage = () => {
   return (
     <Layout>
       <Seo title="Ecommerce home page" />
       <Home />
     </Layout>
-  )
-}
+  );
+};
+
+export default IndexPage;

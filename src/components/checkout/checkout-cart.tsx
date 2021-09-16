@@ -1,30 +1,30 @@
-import React, { useContext } from "react";
-import { Link } from "gatsby";
-import { CartContext, CartContextType } from "components/cart/cart-provider";
-import Card from "./checkout-payment";
-import Seo from "components/seo";
-import { CartTotal } from "shared/hooks/cart-total";
-import { CartInterface } from "shared/interfaces/components/cart.interface";
-import { ProductName } from "components/products/product/product.styles";
-import { Table, TR, TH, TD, Payment } from "./checkout.styles";
+import React, { useContext } from 'react';
+import { Link } from 'gatsby';
+import { CartContext, CartContextType } from 'src/components/cart/cart-provider';
+import Card from './checkout-payment';
+import Seo from 'src/components/seo';
+import { CartTotal } from 'src/shared/hooks/cart-total';
+import { CartInterface } from 'src/shared/interfaces/components/cart.interface';
+import { ProductName } from 'src/components/products/product/product.styles';
+import { Table, TR, TH, TD, Payment } from './checkout.styles';
 
 const CartDisplay = () => {
-  const [cart]: CartContextType = useContext(CartContext);
-  return <>{cart.length > 0 ? CheckoutDisplay(cart) : cartEmpty()}</>
-}
+  const [cart] = useContext<CartContextType>(CartContext);
+  return <>{cart.length > 0 ? CheckoutDisplay(cart) : cartEmpty()}</>;
+};
 
 const cartEmpty = () => {
   return (
     <section className="center">
       <p>Your cart is empty, fill it up!</p>
       <button className="pay-with-stripe">
-        <Link style={{ color: "white" }} to="/">
+        <Link style={{ color: 'white' }} to="/">
           Back Home
         </Link>
       </button>
     </section>
-  )
-}
+  );
+};
 
 const CheckoutDisplay = (cart: CartInterface[]) => {
   return (
@@ -49,7 +49,7 @@ const CheckoutDisplay = (cart: CartInterface[]) => {
               <TD>
                 <strong>{item.quantity}</strong>
               </TD>
-              <TD>{item.quantity * Number(item.price.formatted)}</TD>
+              <TD>{item.quantity! * Number(item.price.formatted)}</TD>
             </TR>
           ))}
         </tbody>
@@ -75,7 +75,7 @@ const CheckoutDisplay = (cart: CartInterface[]) => {
         </div>
       </Payment>
     </>
-  )
-}
+  );
+};
 
 export default CartDisplay;

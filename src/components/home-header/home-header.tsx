@@ -1,5 +1,5 @@
-import React from "react";
-import { StaticImage } from "gatsby-plugin-image";
+import React from 'react';
+import { StaticImage } from 'gatsby-plugin-image';
 import {
   HeaderWrapper,
   PictureContainer,
@@ -10,11 +10,11 @@ import {
   Text,
   Button,
   ButtonLink
-} from "./home-header.styles";
-import { isMobile } from "react-device-detect";
+} from './home-header.styles';
+import { isMobile } from 'react-device-detect';
 
 export default function HomeHeader(): JSX.Element {
-  return(
+  return (
     <HeaderWrapper>
       <PictureContainer>
         {isMobile ? (
@@ -32,11 +32,11 @@ export default function HomeHeader(): JSX.Element {
             <Title>Lorem ipsum</Title>
             <Text>Lorem impsum dolor sit amet</Text>
             <Button>
-              <ButtonLink to='#'>shop now</ButtonLink>
+              <ButtonLink to="#">shop now</ButtonLink>
             </Button>
           </TitleContainer>
         </HeaderBox>
       </HeaderContainer>
     </HeaderWrapper>
-  )
+  );
 }

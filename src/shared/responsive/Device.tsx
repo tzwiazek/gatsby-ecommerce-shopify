@@ -1,5 +1,5 @@
-import { DeviceSizeInterface } from "shared/interfaces/deviceSize.interface";
-import { DeviceSize } from "shared/enums/deviceSize.enum";
+import { DeviceSizeInterface } from 'src/shared/interfaces/deviceSize.interface';
+import { DeviceSize } from 'src/shared/enums/deviceSize.enum';
 
 const device: DeviceSizeInterface = {
   mobileS: `(min-width: ${DeviceSize.mobileS})`,
@@ -9,7 +9,7 @@ const device: DeviceSizeInterface = {
   laptop: `(min-width: ${DeviceSize.laptop})`,
   laptopL: `(min-width: ${DeviceSize.laptopL})`,
   desktop: `(min-width: ${DeviceSize.desktop})`,
-  desktopL: `(min-width: ${DeviceSize.desktop})`,
+  desktopL: `(min-width: ${DeviceSize.desktop})`
 };
 
 export default device;

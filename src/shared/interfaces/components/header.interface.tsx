@@ -8,7 +8,7 @@ export interface MenuElementInterface {}
 
 export interface MenuLinkInterface {
   to: string;
-  category?: any
+  category?: any;
   children: any;
   theme: any;
 }

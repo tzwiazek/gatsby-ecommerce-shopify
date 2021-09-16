@@ -1,7 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React from "react";
-import { CardElement } from "react-stripe-elements";
-import styled from "styled-components";
+import { CardElement } from 'react-stripe-elements';
+import styled from 'styled-components';
 
 export const CardElementStyled = styled(CardElement)`
   margin-top: 10px;
@@ -9,7 +7,7 @@ export const CardElementStyled = styled(CardElement)`
   border: 1px solid #ccc;
   padding: 5px 10px;
   font-size: 16px;
-`
+`;
 
 export const CardStyled = styled.section`
   margin-top: 20px;
@@ -26,30 +24,30 @@ export const CardStyled = styled.section`
   .empty-btn {
     margin-bottom: 30px;
   }
-`
+`;
 
 export const Table = styled.table`
   width: 100%;
   margin-top: 20px;
-`
+`;
 
 export const TR = styled.tr`
   text-align: center;
-`
+`;
 
 export const TH = styled.th`
   padding: 10px 0;
   border-bottom: 1px solid #ccc;
-`
+`;
 
 export const TD = styled.td`
   border-bottom: 1px solid #ccc;
-`
+`;
 
 export const ProductName = styled.h3`
   padding-top: 36px;
   text-align: left;
-`
+`;
 
 export const Payment = styled.section`
   .total {
@@ -82,19 +80,19 @@ export const Payment = styled.section`
   .total {
     width: 90%;
   }
-`
+`;
 
 export const ProductImg = styled.img`
   float: left;
   margin-right: 15px;
   width: 100px;
-`
+`;
 
 export const Loading = styled.section`
   display: flex;
   justify-content: center;
-`
+`;
 
 export const Success = styled.section`
   text-align: center;
-`
+`;
