@@ -15,3 +15,5 @@ An unfinished e-commerce project, made to learn gatsby.
 - mobile-first
 - stripe
 - commercejs
+
+![](github_images/gatsby-ecommerce-lighthouse.png)
