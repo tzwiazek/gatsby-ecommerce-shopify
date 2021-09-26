@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  HeaderTitleWrapper,
-  HeaderTitleContainer,
-  HeaderTitle,
-  Text
-} from './category-title.styles';
+import * as styles from './category-title.module.css';
 
 export default function CategoryTitle({
   title,
@@ -14,13 +9,11 @@ export default function CategoryTitle({
   description: string;
 }): JSX.Element {
   return (
-    <>
-      <HeaderTitleWrapper>
-        <HeaderTitleContainer>
-          <HeaderTitle>{title}</HeaderTitle>
-          <Text>{description}</Text>
-        </HeaderTitleContainer>
-      </HeaderTitleWrapper>
-    </>
+    <header className={styles.headerTitleWrapper}>
+      <div className={styles.headerTitleContainer}>
+        <h1 className={styles.headerTitle}>{title}</h1>
+        <span className={styles.text}>{description}</span>
+      </div>
+    </header>
   );
 }

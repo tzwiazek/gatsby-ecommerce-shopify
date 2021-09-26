@@ -4,20 +4,20 @@ import SEO from 'src/components/seo';
 import Layout from 'src/components/layout/layout';
 import CartDisplay from 'src/components/checkout/checkout-cart';
 import { CartUIProvider, CartUIContext } from 'src/components/cart/cartUI';
-import { Loading, Success } from 'src/components/checkout/checkout.styles';
+import * as styles from '../components/checkout/checkout.module.css';
 
 const displayCartUIContext = (context: string) => {
   if (context === 'checkout') {
     return <CartDisplay />;
   } else if (context === 'loading') {
     return (
-      <Loading>
+      <section className={styles.loading}>
         <h2>Loading...</h2>
-      </Loading>
+      </section>
     );
   } else if (context === 'success') {
     return (
-      <Success>
+      <section className={styles.success}>
         <h2>Success!</h2>
         <p>Thank you for your purchase. You will be receiving your items in4 business days.</p>
         <p>Forgot something?</p>
@@ -26,7 +26,7 @@ const displayCartUIContext = (context: string) => {
             Back to Home
           </Link>
         </button>
-      </Success>
+      </section>
     );
   } else if (context === 'failure') {
     return (

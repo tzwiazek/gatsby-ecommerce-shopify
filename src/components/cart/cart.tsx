@@ -1,42 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { GatsbyImage, StaticImage } from 'gatsby-plugin-image';
 import { CartTotal } from 'src/shared/hooks/cart-total';
 import { CartInterface } from 'src/shared/interfaces/components/cart.interface';
-import { HeaderService } from 'src/components/header/header.service';
-import { CartContext, CartContextType } from './cart-provider';
-import {
-  CartWrapper,
-  CloseButton,
-  TitleContainer,
-  Text,
-  CartContainer,
-  EmptyCartContainer,
-  EmptyCartWrapper,
-  EmptyCartImage,
-  EmptyCartText,
-  EmptyCartButton,
-  Product,
-  ProductsContainer,
-  Amount,
-  CartFooter,
-  CheckoutContainer,
-  CheckoutLink,
-  Subtotal,
-  SubtotalContainer,
-  TextSubtotal,
-  ProductImageContainer,
-  ProductDetailsTitleContainer,
-  ProductDetailsTitleLink,
-  RemoveProduct,
-  ProductDetailsContainer,
-  ProductPrice,
-  ProductPriceContainer,
-  QuantityContainer,
-  Button,
-  Quantity
-} from './cart.styles';
+import { CartContext, CartContextType } from '../../contexts/cart.context';
+import { Link } from 'gatsby';
+import * as styles from './cart.module.css';
+import { ToggleContext } from 'src/contexts/toggle.context';
 
 const Cart = (): JSX.Element => {
+  const { cartVisible, setCartVisible } = useContext(ToggleContext);
   const [cart, , , removeItemFromCart, changeItemQuantity] =
     useContext<CartContextType>(CartContext);
   const [toggleCart, setToggleCart] = useState<boolean>(false);
@@ -44,95 +16,123 @@ const Cart = (): JSX.Element => {
   useEffect(() => {
     let isCartMount = false;
 
-    HeaderService.toggleCart$.subscribe((isActive: boolean) => {
-      if (!isCartMount) {
-        setToggleCart(isActive);
-      }
-    });
+    if (!isCartMount) {
+      setToggleCart(cartVisible);
+    }
 
     return () => {
       isCartMount = true;
     };
-  }, []);
+  }, [cartVisible]);
 
   return (
-    <CartWrapper toggle={toggleCart}>
-      <TitleContainer>
-        <Text>Your Cart</Text>
-        <CloseButton onClick={() => HeaderService.toggleCart$.next(false)}></CloseButton>
-      </TitleContainer>
-      <CartContainer>
+    <div className={`${styles.cartWrapper} ${toggleCart ? styles.toggle : ''}`}>
+      <div className={styles.titleContainer}>
+        <span className={styles.text}>Your Cart</span>
+        <span className={styles.closeButton} onClick={() => setCartVisible(false)}></span>
+      </div>
+      <div className={styles.cartContainer}>
         {cart.length === 0 ? (
-          <EmptyCartWrapper>
-            <EmptyCartContainer>
-              <EmptyCartImage></EmptyCartImage>
-              <EmptyCartText>You have no products in your cart</EmptyCartText>
-              <EmptyCartButton onClick={() => HeaderService.toggleCart$.next(false)}>
+          <div className={styles.emptyCartWrapper}>
+            <div className={styles.emptyCartContainer}>
+              <div className={styles.emptyCartImage}>
+                <StaticImage
+                  layout="constrained"
+                  formats={['auto', 'webp', 'avif']}
+                  src="../../assets/img/empty-cart.png"
+                  height={80}
+                  quality={90}
+                  alt="Empty cart"
+                />
+              </div>
+              <span className={styles.emptyCartText}>You have no products in your cart</span>
+              <button className={styles.emptyCartButton} onClick={() => setCartVisible(false)}>
                 Continue shopping
-              </EmptyCartButton>
-            </EmptyCartContainer>
-          </EmptyCartWrapper>
+              </button>
+            </div>
+          </div>
         ) : (
-          <ProductsContainer>
+          <div className={styles.productsContainer}>
             {cart.map((cartItem: CartInterface) => {
               return (
-                <Product key={cartItem.id}>
-                  <ProductImageContainer
+                <div className={styles.product} key={cartItem.id}>
+                  <Link
+                    className={styles.productImageContainer}
                     to={cartItem.permalink}
-                    onClick={() => HeaderService.toggleCart$.next(false)}>
+                    onClick={() => setCartVisible(false)}>
                     <GatsbyImage
                       image={cartItem.images[0].childImageSharp.gatsbyImageData}
                       alt=""
                     />
-                  </ProductImageContainer>
-                  <ProductDetailsContainer>
-                    <ProductDetailsTitleContainer>
-                      <ProductDetailsTitleLink
+                  </Link>
+                  <div className={styles.productDetailsContainer}>
+                    <div className={styles.productDetailsTitleContainer}>
+                      <Link
+                        className={styles.productDetailsTitleLink}
                         to={cartItem.permalink}
-                        onClick={() => HeaderService.toggleCart$.next(false)}>
+                        onClick={() => setCartVisible(false)}>
                         {cartItem.name}
-                      </ProductDetailsTitleLink>
-                      <RemoveProduct onClick={() => removeItemFromCart(cartItem.id)} />
-                    </ProductDetailsTitleContainer>
+                      </Link>
+                      <span
+                        className={styles.removeProduct}
+                        onClick={() => removeItemFromCart(cartItem.id)}>
+                        <StaticImage
+                          layout="fixed"
+                          formats={['auto', 'webp', 'avif']}
+                          src="../../assets/img/icons/garbage.png"
+                          width={15}
+                          height={15}
+                          quality={80}
+                          alt="garbage"
+                        />
+                      </span>
+                    </div>
 
-                    <ProductPriceContainer>
-                      <ProductPrice>
+                    <div className={styles.productPriceContainer}>
+                      <span>
                         {cartItem.quantity} X {cartItem.price.formatted} zł
-                      </ProductPrice>
-                    </ProductPriceContainer>
+                      </span>
+                    </div>
 
-                    <QuantityContainer>
-                      <Button type="minus" onClick={() => changeItemQuantity(cartItem.id, -1)}>
+                    <div className={styles.quantityContainer}>
+                      <div
+                        className={styles.button}
+                        onClick={() => changeItemQuantity(cartItem.id, -1)}>
                         -
-                      </Button>
-                      <Quantity>{cartItem.quantity}</Quantity>
-                      <Button type="minus" onClick={() => changeItemQuantity(cartItem.id, +1)}>
+                      </div>
+                      <div className={styles.quantity}>{cartItem.quantity}</div>
+                      <div
+                        className={styles.button}
+                        onClick={() => changeItemQuantity(cartItem.id, +1)}>
                         +
-                      </Button>
-                    </QuantityContainer>
-                  </ProductDetailsContainer>
-                </Product>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               );
             })}
-          </ProductsContainer>
+          </div>
         )}
-      </CartContainer>
+      </div>
       {cart.length > 0 && (
-        <CartFooter>
-          <SubtotalContainer>
-            <Subtotal>
-              <TextSubtotal>grand total</TextSubtotal>
-              <Amount>{CartTotal(cart)} zł</Amount>
-            </Subtotal>
-          </SubtotalContainer>
-          <CheckoutContainer>
-            <CheckoutLink to="/checkout" onClick={() => HeaderService.toggleCart$.next(false)}>
+        <div className={styles.cartFooter}>
+          <div className={styles.subtotalContainer}>
+            <div className={styles.subtotal}>
+              <span className={styles.textSubtotal}>grand total</span>
+              <span>{CartTotal(cart)} zł</span>
+            </div>
+          </div>
+          <div className={styles.checkoutContainer}>
+            <Link
+              className={styles.checkoutLink}
+              to="/checkout"
+              onClick={() => setCartVisible(false)}>
               go to checkout
-            </CheckoutLink>
-          </CheckoutContainer>
-        </CartFooter>
+            </Link>
+          </div>
+        </div>
       )}
-    </CartWrapper>
+    </div>
   );
 };
 

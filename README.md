@@ -1,20 +1,6 @@
-https://musing-elion-797f79.netlify.app/
-
 ## 🚀 Quick start
 
-An unfinished e-commerce project, made to learn gatsby.
-
-- Gatsby
-- GraphQL
-- Typescript
-- Styled-components
-- SASS
-- rxjs (for tests)
-- prettier
-- eslint
-- tsconfig
-- mobile-first
-- stripe
-- commercejs
+Optimized version of https://github.com/tzwiazek/gatsby-ecommerce with shopify as backend
 
 ![](github_images/gatsby-ecommerce-lighthouse.png)
+![](github_images/gatsby-ecommerce-shopify-lighthouse.png)

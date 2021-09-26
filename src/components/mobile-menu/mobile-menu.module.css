@@ -1,19 +1,4 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import styled from 'styled-components';
-import {
-  FavoriteInterface,
-  MenuBottomContainerInterface,
-  MenuBottomLinkInterface,
-  MenuBottomWrapperInterface,
-  MenuElementInterface,
-  MenuElementLinkInterface,
-  MenuInterface,
-  NavInterface,
-  TextInterface
-} from 'src/shared/interfaces/components/mobile-menu.interface';
-
-export const Nav = styled.nav<NavInterface>`
+.nav {
   margin-top: 80px;
   text-transform: uppercase;
   overflow: hidden;
@@ -32,43 +17,39 @@ export const Nav = styled.nav<NavInterface>`
   padding: 10px 20px 20px;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+}
 
-  ${({ active }) =>
-    active &&
-    `
-    -webkit-transform:translateX(0);
-    transform:translateX(0);
-  `}
+.nav.isActive {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
 
-  ${({ scroll }) =>
-    scroll &&
-    `
-    margin-top:40px;
-    -webkit-transition:0.4s;
-    -o-transition:0.4s;
-    transition:0.4s;
-  `}
-`;
+.nav.scroll {
+  margin-top: 40px;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
+}
 
-export const Menu = styled.ul<MenuInterface>`
+.menu {
   margin: 0;
-`;
+}
 
-export const MenuElement = styled.li<MenuElementInterface>`
+.menuElement {
   text-align: center;
   border-top: 1px solid #f2f2f2;
   text-transform: capitalize;
-`;
+}
 
-export const MenuElementLink = styled((props: MenuElementLinkInterface) => <Link {...props} />)`
+.menuElementLink {
   padding: 15px 20px;
   font-size: 0.9rem;
   letter-spacing: 0.8px;
   display: block;
   color: black;
-`;
+}
 
-export const MenuBottomWrapper = styled.div<MenuBottomWrapperInterface>`
+.menuBottomWrapper {
   width: 100%;
   height: 50px;
   position: absolute;
@@ -77,9 +58,9 @@ export const MenuBottomWrapper = styled.div<MenuBottomWrapperInterface>`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-`;
+}
 
-export const MenuBottomContainer = styled.div<MenuBottomContainerInterface>`
+.menuBottomContainer {
   width: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -90,9 +71,9 @@ export const MenuBottomContainer = styled.div<MenuBottomContainerInterface>`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-`;
+}
 
-export const MenuBottomLink = styled.a<MenuBottomLinkInterface>`
+.menuBottomLink {
   margin: 0;
   padding: 0;
   letter-spacing: 0.5px;
@@ -109,15 +90,15 @@ export const MenuBottomLink = styled.a<MenuBottomLinkInterface>`
   -ms-flex-align: center;
   align-items: center;
   color: black;
-`;
+}
 
-export const Text = styled.span<TextInterface>`
+.text {
   font-size: 0.9rem;
-`;
+}
 
-export const Favorite = styled.span<FavoriteInterface>`
+.favorite {
   font-size: 0.72rem;
   margin-top: -8px;
   margin-left: 1px;
   font-weight: 500;
-`;
+}

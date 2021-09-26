@@ -1,42 +1,45 @@
 import React from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
-import {
-  HeaderWrapper,
-  PictureContainer,
-  HeaderContainer,
-  HeaderBox,
-  TitleContainer,
-  Title,
-  Text,
-  Button,
-  ButtonLink
-} from './home-header.styles';
+import * as styles from './home-header.module.css';
 import { isMobile } from 'react-device-detect';
+import { Link } from 'gatsby';
 
 export default function HomeHeader(): JSX.Element {
   return (
-    <HeaderWrapper>
-      <PictureContainer>
+    <div className={styles.headerWrapper}>
+      <picture className={styles.pictureContainer}>
         {isMobile ? (
-          <StaticImage src="../../assets/img/home-header-640x730.webp" alt="home header image" />
+          <StaticImage
+            src="../../assets/img/home-header-640x730.webp"
+            formats={['auto', 'webp', 'avif']}
+            quality={90}
+            alt="home header image"
+          />
         ) : (
-          <StaticImage src="../../assets/img/home-header-2800x900.webp" alt="home header image" />
+          <StaticImage
+            src="../../assets/img/home-header-2800x900.webp"
+            formats={['auto', 'webp', 'avif']}
+            quality={90}
+            alt="home header image"
+          />
         )}
-      </PictureContainer>
+      </picture>
 
-      <HeaderContainer>
-        <HeaderBox type={2} hidden></HeaderBox>
-        <HeaderBox type={2} hidden></HeaderBox>
-        <HeaderBox type={1}>
-          <TitleContainer type={1}>
-            <Title>Lorem ipsum</Title>
-            <Text>Lorem impsum dolor sit amet</Text>
-            <Button>
-              <ButtonLink to="#">shop now</ButtonLink>
-            </Button>
-          </TitleContainer>
-        </HeaderBox>
-      </HeaderContainer>
-    </HeaderWrapper>
+      <div className={styles.headerContainer}>
+        <div className={`${styles.headerBox} ${styles.typeSecond} ${styles.hidden}`} />
+        <div className={`${styles.headerBox} ${styles.typeSecond} ${styles.hidden}`} />
+        <div className={`${styles.headerBox} ${styles.typeOne}`}>
+          <div className={styles.titleContainer}>
+            <h1 className={styles.title}>Lorem ipsum</h1>
+            <p className={styles.text}>Lorem impsum dolor sit amet</p>
+            <div className={styles.button}>
+              <Link className={styles.buttonLink} to="#">
+                shop now
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

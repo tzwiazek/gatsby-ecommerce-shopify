@@ -4,7 +4,6 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { CartTotal } from 'src/shared/hooks/cart-total';
 import { CartInterface } from 'src/shared/interfaces/components/cart.interface';
-import { CardElementStyled } from './checkout.styles';
 
 interface CheckoutInterface {
   cart: CartInterface[];
@@ -66,10 +65,7 @@ const Checkout = ({
 
   return (
     <>
-      <CardElementStyled
-        onChange={(event) => updateComplete(event.complete)}
-        style={{ base: { fontSize: '16px' } }}
-      />
+      <CardElement onChange={(event) => updateComplete(event.complete)} />
       <button
         onClick={handleSubmit}
         className="pay-with-stripe button"

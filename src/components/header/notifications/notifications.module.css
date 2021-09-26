@@ -1,16 +1,4 @@
-import styled from 'styled-components';
-import {
-  ArrowIconInterface,
-  ArrowInterface,
-  HeaderSwipeInterface,
-  NotificationInterface,
-  NotificationLinkInterface,
-  SwipeWrapInterface,
-  TextInterface
-} from 'src/shared/interfaces/components/notification.interface';
-import device from 'src/shared/responsive/Device';
-
-export const HeaderSwipe = styled.div<HeaderSwipeInterface>`
+.headerSwipe {
   position: fixed;
   width: 100%;
   background: black;
@@ -21,9 +9,9 @@ export const HeaderSwipe = styled.div<HeaderSwipeInterface>`
   -webkit-transition: 0.7s;
   -o-transition: 0.7s;
   transition: 0.7s;
-`;
+}
 
-export const SwipeWrap = styled.div<SwipeWrapInterface>`
+.swipeWrap {
   overflow: hidden;
   position: relative;
   z-index: -1;
@@ -34,9 +22,9 @@ export const SwipeWrap = styled.div<SwipeWrapInterface>`
   -webkit-transition: 0.7s;
   -o-transition: 0.7s;
   transition: 0.7s;
-`;
+}
 
-export const Notification = styled.div<NotificationInterface>`
+.notification {
   float: left;
   width: 100vw;
   position: relative;
@@ -49,16 +37,14 @@ export const Notification = styled.div<NotificationInterface>`
   transition: 0.7s;
   flex-wrap: wrap;
   align-items: center;
+}
 
-  ${({ showMore }) =>
-    showMore &&
-    `
-    height:100px;
-    transition:0.7s;
-  `}
-`;
+.notification.showMore {
+  height: 100px;
+  transition: 0.7s;
+}
 
-export const Text = styled.span<TextInterface>`
+.text {
   cursor: context-menu;
   font-size: 0.9rem;
   display: flex;
@@ -67,11 +53,13 @@ export const Text = styled.span<TextInterface>`
   width: auto;
   line-height: 1.4;
   justify-content: center;
+}
 
-  width: ${({ size }) => size};
-`;
+.text.opened {
+  width: 80vw;
+}
 
-export const NotificationLink = styled.a<NotificationLinkInterface>`
+.notificationLink {
   cursor: pointer;
   font-size: 0.9rem;
   display: flex;
@@ -83,13 +71,13 @@ export const NotificationLink = styled.a<NotificationLinkInterface>`
   text-decoration: underline;
   margin: 0 4px;
   height: 20px;
+}
 
-  &:hover {
-    color: white;
-  }
-`;
+.notificationLink:hover {
+  color: white;
+}
 
-export const Arrow = styled.div<ArrowInterface>`
+.arrow {
   width: 40px;
   height: 100%;
   display: -webkit-box;
@@ -105,28 +93,27 @@ export const Arrow = styled.div<ArrowInterface>`
   position: absolute;
   top: 0;
   background: #000000;
+}
 
-  ${({ type }) =>
-    type === 'left'
-      ? `
-    left:0;
-  `
-      : `
-    right:0;
-  `}
+.arrow.left {
+  left: 0;
+}
 
-  @media screen and ${device.laptop} {
-    width: 60px;
-  }
-`;
+.arrow.right {
+  right: 0;
+}
 
-export const ArrowIcon = styled.img<ArrowIconInterface>`
+.arrowIcon {
   width: 12px;
   height: 12px;
+}
 
-  ${({ showMore }) =>
-    showMore &&
-    `
-    transform:rotate(45deg);
-  `}
-`;
+.arrowIcon.showMore {
+  transform: rotate(45deg);
+}
+
+@media screen and (min-width: 1024px) {
+  .arrow {
+    width: 60px;
+  }
+}

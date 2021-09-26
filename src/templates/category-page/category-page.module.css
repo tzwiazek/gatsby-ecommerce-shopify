@@ -1,0 +1,38 @@
+.categoryContainer {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1480px;
+  padding: 0 20px;
+}
+
+.collectionTitle {
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+  letter-spacing: 1.5px;
+  margin: 30px 0;
+}
+
+.productsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .collectionTitle {
+    font-size: 1.8rem;
+  }
+
+  .productsContainer {
+    max-width: 1440px;
+  }
+}
+
+@media screen and (min-width: 525px) {
+  .collectionTitle {
+    font-size: 1.6rem;
+  }
+}

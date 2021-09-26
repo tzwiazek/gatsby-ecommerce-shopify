@@ -1,0 +1,17 @@
+.headerContainer {
+  margin-top: 0px;
+  height: 88px;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.headerContainer.scroll {
+  margin-top: -40px;
+}
+
+@media screen and (min-width: 1024px) {
+  .headerContainer {
+    height: 100px;
+  }
+}

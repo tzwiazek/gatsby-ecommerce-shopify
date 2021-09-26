@@ -1,13 +1,14 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { graphql } from 'gatsby';
 import { reactLocalStorage } from 'reactjs-localstorage';
-import { CartContext, CartContextType } from 'src/components/cart/cart-provider';
-import { HeaderService } from 'src/components/header/header.service';
+import { CartContext, CartContextType } from 'src/contexts/cart.context';
 import Layout from 'src/components/layout/layout';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { CartInterface } from 'src/shared/interfaces/components/cart.interface';
+import { ToggleContext } from 'src/contexts/toggle.context';
 
 export default function ProductPage({ data: { product } }: { data: { product: any } }) {
+  const { setCartVisible } = useContext(ToggleContext);
   const [mainImage] = product.images;
   const [quantity]: [number, Dispatch<SetStateAction<number>>] = useState(1);
   const [cart, setCart, , , changeItemQuantity]: CartContextType = useContext(CartContext);
@@ -29,7 +30,7 @@ export default function ProductPage({ data: { product } }: { data: { product: an
       setCart(tempCart);
       reactLocalStorage.setObject('cart', tempCart);
     }
-    HeaderService.toggleCart$.next(true);
+    setCartVisible(true);
   };
 
   return (

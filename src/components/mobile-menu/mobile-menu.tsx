@@ -1,21 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CartInterface } from 'src/shared/interfaces/components/cart.interface';
-import { CartContext, CartContextType } from 'src/components/cart/cart-provider';
-import { HeaderService } from 'src/components/header/header.service';
-import {
-  Favorite,
-  Menu,
-  MenuBottomContainer,
-  MenuBottomLink,
-  MenuBottomWrapper,
-  MenuElement,
-  MenuElementLink,
-  Nav,
-  Text
-} from './mobile-menu.styles';
+import { CartContext, CartContextType } from 'src/contexts/cart.context';
+import * as styles from './mobile-menu.module.css';
+import { Link } from 'gatsby';
+import { ToggleContext } from 'src/contexts/toggle.context';
 
 export default function MobileMenu(): JSX.Element {
-  const [toggleMenu, setToggleMenu] = useState<boolean>(false);
+  const { menuVisible, setMenuVisible } = useContext(ToggleContext);
   const [toggleHeader, setToggleHeader] = useState<boolean>(false);
   const [cart] = useContext<CartContextType>(CartContext);
   const [cartCount, updateCartCount] = useState<number>(0);
@@ -28,15 +19,6 @@ export default function MobileMenu(): JSX.Element {
     } else {
       setToggleHeader(false);
     }
-
-    HeaderService.toggleMenu$.subscribe((isActive: boolean) => {
-      const bodyElement: HTMLElement = document.getElementsByTagName('body')[0];
-      isActive
-        ? bodyElement.classList.add('stop-scrolling')
-        : bodyElement.classList.remove('stop-scrolling');
-
-      setToggleMenu(isActive);
-    });
 
     const handleScroll = () => {
       const top: number = window.pageYOffset || document.documentElement.scrollTop;
@@ -52,48 +34,68 @@ export default function MobileMenu(): JSX.Element {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [toggleHeader, cart]);
 
+  useEffect(() => {
+    const bodyElement: HTMLElement = document.getElementsByTagName('body')[0];
+    menuVisible
+      ? bodyElement.classList.add('stop-scrolling')
+      : bodyElement.classList.remove('stop-scrolling');
+  }, [menuVisible]);
+
   return (
-    <Nav id="mobile-navigation" active={toggleMenu} scroll={toggleHeader}>
-      <Menu>
-        <MenuElement>
-          <MenuElementLink to="/watches" onClick={() => HeaderService.toggleMenu$.next(false)}>
+    <nav
+      id="mobile-navigation"
+      className={`${styles.nav} ${menuVisible ? styles.isActive : ''} ${
+        toggleHeader ? styles.scroll : ''
+      }`}>
+      <ul className={styles.menu}>
+        <li className={styles.menuElement}>
+          <Link
+            to="/watches"
+            className={styles.menuElementLink}
+            onClick={() => setMenuVisible(false)}>
             Watches
-          </MenuElementLink>
-        </MenuElement>
+          </Link>
+        </li>
 
-        <MenuElement>
-          <MenuElementLink to="/jewelry" onClick={() => HeaderService.toggleMenu$.next(false)}>
+        <li className={styles.menuElement}>
+          <Link
+            to="/jewelry"
+            className={styles.menuElementLink}
+            onClick={() => setMenuVisible(false)}>
             Jewelry
-          </MenuElementLink>
-        </MenuElement>
+          </Link>
+        </li>
 
-        <MenuElement>
-          <MenuElementLink to="/watch-bands" onClick={() => HeaderService.toggleMenu$.next(false)}>
+        <li className={styles.menuElement}>
+          <Link
+            to="/watch-bands"
+            className={styles.menuElementLink}
+            onClick={() => setMenuVisible(false)}>
             Watch bands
-          </MenuElementLink>
-        </MenuElement>
+          </Link>
+        </li>
 
-        <MenuElement>
-          <MenuElementLink to="#" onClick={() => HeaderService.toggleMenu$.next(false)}>
+        <li className={styles.menuElement}>
+          <Link to="#" className={styles.menuElementLink} onClick={() => setMenuVisible(false)}>
             Blog
-          </MenuElementLink>
-        </MenuElement>
+          </Link>
+        </li>
 
-        <MenuBottomWrapper>
-          <MenuBottomContainer>
-            <MenuBottomLink href="#">
-              <Text>Favorite</Text>
-              {cart.length > 0 ? <Favorite>{cartCount}</Favorite> : null}
-            </MenuBottomLink>
-          </MenuBottomContainer>
+        <div className={styles.menuBottomWrapper}>
+          <div className={styles.menuBottomContainer}>
+            <a className={styles.menuBottomLink} href="#">
+              <span className={styles.text}>Favorite</span>
+              {cart.length > 0 ? <span className={styles.favorite}>{cartCount}</span> : null}
+            </a>
+          </div>
 
-          <MenuBottomContainer>
-            <MenuBottomLink href="#">
-              <Text>Register</Text>
-            </MenuBottomLink>
-          </MenuBottomContainer>
-        </MenuBottomWrapper>
-      </Menu>
-    </Nav>
+          <div className={styles.menuBottomContainer}>
+            <a className={styles.menuBottomLink} href="#">
+              <span className={styles.text}>Register</span>
+            </a>
+          </div>
+        </div>
+      </ul>
+    </nav>
   );
 }

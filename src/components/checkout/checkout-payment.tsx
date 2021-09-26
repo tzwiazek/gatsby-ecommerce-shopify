@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import { CartContext, CartContextType } from '../cart/cart-provider';
+import { CartContext, CartContextType } from '../../contexts/cart.context';
 import { CartUIContext } from 'src/components/cart/cartUI';
 import Checkout from './checkout';
-import { CardStyled } from './checkout.styles';
+import * as styles from './checkout.module.css';
 
 const Payment = () => {
   const [email, updateEmail] = useState<string>('');
@@ -16,8 +16,8 @@ const Payment = () => {
   );
 
   return (
-    <CardStyled>
-      <button className="empty-btn" onClick={() => emptyCart()}>
+    <section className={styles.card}>
+      <button className={styles.emptyBtn} onClick={() => emptyCart()}>
         Empty Cart
       </button>
       <h3>Please enter your payment details:</h3>
@@ -47,7 +47,7 @@ const Payment = () => {
           emptyCart={emptyCart}
           updateCartUI={updateCartUI}></Checkout>
       </Elements>
-    </CardStyled>
+    </section>
   );
 };
 

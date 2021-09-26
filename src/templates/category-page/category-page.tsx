@@ -4,12 +4,7 @@ import Layout from 'src/components/layout/layout';
 import CategoryTitle from 'src/components/categories/category-title/category-title';
 import Seo from 'src/components/seo';
 import { CartInterface } from 'src/shared/interfaces/components/cart.interface';
-import {
-  CategoryContainer,
-  ProductsWrapper,
-  CollectionTitle,
-  ProductsContainer
-} from './category-page.styles';
+import * as styles from './category-page.module.css';
 import Product from 'src/components/products/product/product';
 
 export default function CategoryPage({
@@ -23,20 +18,21 @@ export default function CategoryPage({
     <Layout>
       <Seo title={`All ${category.name} SEO title`} />
 
-      <CategoryContainer>
+      <div className={styles.categoryContainer}>
         <CategoryTitle
           title={category.name.charAt(0).toUpperCase() + category.name.slice(1)}
-          description={category.description}></CategoryTitle>
+          description={category.description}
+        />
 
-        <ProductsWrapper>
-          <CollectionTitle>Lorem ipsum</CollectionTitle>
-          <ProductsContainer>
+        <>
+          <h1 className={styles.collectionTitle}>Lorem ipsum</h1>
+          <div className={styles.productsContainer}>
             {products.map((product: CartInterface) => {
               return <Product product={product} key={product.name}></Product>;
             })}
-          </ProductsContainer>
-        </ProductsWrapper>
-      </CategoryContainer>
+          </div>
+        </>
+      </div>
     </Layout>
   );
 }

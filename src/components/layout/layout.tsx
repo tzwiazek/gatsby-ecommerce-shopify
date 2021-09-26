@@ -3,28 +3,9 @@ import Header from 'src/components/header/header';
 import Notifications from 'src/components/header/notifications/notifications';
 import { isMobile } from 'react-device-detect';
 import MobileMenu from 'src/components/mobile-menu/mobile-menu';
-import styled from 'styled-components';
-import device from 'src/shared/responsive/Device';
 import Cart from 'src/components/cart/cart';
 import 'assets/styles/globalStyles.css';
-
-const HeaderContainer = styled.div<any>`
-  margin-top: 0px;
-  height: 88px;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-
-  @media screen and ${device.laptop} {
-    height: 100px;
-  }
-
-  ${({ scroll }) =>
-    scroll &&
-    `
-    margin-top:-40px;
-  `}
-`;
+import * as styles from './layout.module.css';
 
 const Layout = ({ children }: any) => {
   const [toggleHeader, setToggleHeader] = useState<boolean>(false);
@@ -52,10 +33,10 @@ const Layout = ({ children }: any) => {
 
   return (
     <>
-      <HeaderContainer scroll={toggleHeader}>
+      <div className={`${styles.headerContainer} ${toggleHeader ? styles.scroll : ''}`}>
         <Notifications />
         <Header />
-      </HeaderContainer>
+      </div>
       {isMobile && <MobileMenu />}
       <Cart />
       <main>{children}</main>

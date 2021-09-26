@@ -11,30 +11,29 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-preact`,
-    `gatsby-plugin-styled-components`,
-    'gatsby-plugin-sass',
+    {
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        // printRejected: true, // Print removed selectors and processed file names
+        develop: true
+      }
+    },
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
         defaults: {
-          formats: [`auto`, `webp`],
+          formats: [`auto`, `webp`, 'avif'],
           placeholder: `dominantColor`,
           quality: 90,
           breakpoints: [786, 1024, 1920],
-          backgroundColor: `transparent`,
-          tracedSVGOptions: {},
-          blurredOptions: {},
-          jpgOptions: {},
-          pngOptions: {},
-          webpOptions: {},
-          avifOptions: {},
+          backgroundColor: `transparent`
         },
       },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-image`,
     `react-device-detect`,
-    `gatsby-plugin-stripe`,
+    // `gatsby-plugin-stripe`,
     `gatsby-plugin-root-import`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -45,13 +44,14 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: "standalone",
-        icon: `${__dirname}/src/assets/img/azavo-logo.png`,
+        icon: `${__dirname}/src/assets/img/azavo-logo.webp`,
         icon_options: {
           purpose: `any maskable`,
         },
         crossOrigin: `use-credentials`
       },
     },
+    `gatsby-plugin-csp`,
     {
       resolve: '@chec/gatsby-source-chec',
       options: {
@@ -59,8 +59,12 @@ module.exports = {
         downloadImageAssets: true
       }
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-brotli`,
+      options: {
+        extensions: ['css', 'html', 'js', 'svg']
+      }
+    }
   ]
 }

@@ -1,25 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  HeaderElement,
-  LogoLink,
-  Menu,
-  MenuElement,
-  MenuLink,
-  Nav,
-  SiteBranding,
-  LogoImg,
-  MenuIcon,
-  Count,
-  MenuCart
-} from './header.styles';
 import logoSVG from 'assets/img/azavo-logo.svg';
-import { HeaderService } from './header.service';
 import { isMobile } from 'react-device-detect';
-import { CartContext, CartContextType } from 'src/components/cart/cart-provider';
+import { CartContext, CartContextType } from 'src/contexts/cart.context';
 import { CartInterface } from 'src/shared/interfaces/components/cart.interface';
+import * as styles from './header.module.css';
+import { Link } from 'gatsby';
+import { ToggleContext } from 'src/contexts/toggle.context';
 
 export default function Header(): JSX.Element {
-  const [isActiveMobileMenu, setActiveMobileMenu] = useState<boolean>(false);
+  const { setMenuVisible, setCartVisible } = useContext(ToggleContext);
   const [cart] = useContext<CartContextType>(CartContext);
   const [cartCount, updateCartCount] = useState<number>(0);
 
@@ -27,73 +16,59 @@ export default function Header(): JSX.Element {
     updateCartCount(cart.reduce((acc: number, next: CartInterface) => acc + next.quantity!, 0));
   }, [cart]);
 
-  function toggleMenu(): boolean {
-    setActiveMobileMenu((value: boolean) => !value);
-    return !isActiveMobileMenu;
-  }
-
   return (
-    <HeaderElement>
-      <Nav type="left">
+    <header className={styles.headerElement}>
+      <nav className={`${styles.nav} ${styles.left}`}>
         {isMobile ? (
-          <MenuIcon
-            type="bars"
-            onClick={() => HeaderService.toggleMenu$.next(toggleMenu())}></MenuIcon>
+          <i
+            className={`${styles.menuIcon} ${styles.menu}`}
+            onClick={() => setMenuVisible((toggle: boolean) => !toggle)}
+          />
         ) : (
-          <Menu>
-            <MenuElement>
-              <MenuLink to="/watches" category={1}>
-                Watches
-              </MenuLink>
-            </MenuElement>
-            <MenuElement>
-              <MenuLink to="/jewelry" category={1}>
-                Jewelry
-              </MenuLink>
-            </MenuElement>
-            <MenuElement>
-              <MenuLink to="/watch-bands" category={1}>
-                Watch bands
-              </MenuLink>
-            </MenuElement>
-          </Menu>
+          <div className={styles.menu}>
+            <Link to="/watches" className={`${styles.menuLink} ${styles.category}`}>
+              Watches
+            </Link>
+            <Link to="/watches" className={`${styles.menuLink} ${styles.category}`}>
+              Jewelry
+            </Link>
+            <Link to="/watches" className={`${styles.menuLink} ${styles.category}`}>
+              Watch bands
+            </Link>
+          </div>
         )}
-      </Nav>
+      </nav>
 
-      <SiteBranding>
-        <LogoLink to="/">
-          <LogoImg src={logoSVG} alt="logo" />
-        </LogoLink>
-      </SiteBranding>
+      <Link to="/">
+        <img className={styles.logoImg} src={logoSVG} alt="logo" />
+      </Link>
 
-      <Nav type="right">
+      <nav className={`${styles.nav} ${styles.right}`}>
         {isMobile ? (
-          <MenuCart onClick={() => HeaderService.toggleCart$.next(true)}>
-            <MenuIcon type="shopping-cart"></MenuIcon>
-            {cart.length > 0 ? <Count toggle="is-active">{cartCount}</Count> : null}
-          </MenuCart>
+          <div className={styles.menuCart} onClick={() => setCartVisible(true)}>
+            <i className={`${styles.menuIcon} ${styles.shoppingBag}`} />
+            {cart.length > 0 ? (
+              <span className={`${styles.count} ${styles.isActive}`}>{cartCount}</span>
+            ) : null}
+          </div>
         ) : (
-          <Menu>
-            <MenuElement>
-              <MenuLink to="/" aria-label="Favorite">
-                <MenuIcon type="favorite"></MenuIcon>
-                <Count toggle="hidden"></Count>
-              </MenuLink>
-            </MenuElement>
-            <MenuElement>
-              <MenuLink to="/" aria-label="Account">
-                <MenuIcon type="account"></MenuIcon>
-              </MenuLink>
-            </MenuElement>
-            <MenuElement>
-              <MenuCart onClick={() => HeaderService.toggleCart$.next(true)}>
-                <MenuIcon type="shopping-cart"></MenuIcon>
-                {cart.length > 0 ? <Count toggle="is-active">{cartCount}</Count> : null}
-              </MenuCart>
-            </MenuElement>
-          </Menu>
+          <div className={styles.menu}>
+            <Link to="/" className={styles.menuLink} aria-label="Favorite">
+              <i className={`${styles.menuIcon} ${styles.favorite}`} />
+              <span className={styles.count}></span>
+            </Link>
+            <Link to="/" className={styles.menuLink} aria-label="Account">
+              <i className={`${styles.menuIcon} ${styles.account}`} />
+            </Link>
+            <div className={styles.menuCart} onClick={() => setCartVisible(true)}>
+              <i className={`${styles.menuIcon} ${styles.shoppingBag}`} />
+              {cart.length > 0 ? (
+                <span className={`${styles.count} ${styles.isActive}`}>{cartCount}</span>
+              ) : null}
+            </div>
+          </div>
         )}
-      </Nav>
-    </HeaderElement>
+      </nav>
+    </header>
   );
 }

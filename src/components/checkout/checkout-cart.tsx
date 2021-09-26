@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'gatsby';
-import { CartContext, CartContextType } from 'src/components/cart/cart-provider';
+import { CartContext, CartContextType } from 'src/contexts/cart.context';
 import Card from './checkout-payment';
 import Seo from 'src/components/seo';
 import { CartTotal } from 'src/shared/hooks/cart-total';
 import { CartInterface } from 'src/shared/interfaces/components/cart.interface';
-import { ProductName } from 'src/components/products/product/product.styles';
-import { Table, TR, TH, TD, Payment } from './checkout.styles';
+import * as styles from './checkout.module.css';
 
 const CartDisplay = () => {
   const [cart] = useContext<CartContextType>(CartContext);
@@ -30,50 +29,50 @@ const CheckoutDisplay = (cart: CartInterface[]) => {
   return (
     <>
       <Seo title="Checkout page" />
-      <Table>
+      <table className={styles.table}>
         <tbody>
-          <TR>
-            <TH>Product</TH>
-            <TH>Price</TH>
-            <TH>Quantity</TH>
-            <TH>Total</TH>
-          </TR>
+          <tr className={styles.tr}>
+            <th className={styles.th}>Product</th>
+            <th className={styles.th}>Price</th>
+            <th className={styles.th}>Quantity</th>
+            <th className={styles.th}>Total</th>
+          </tr>
           {cart.map((item, index) => (
-            <TR key={index}>
-              <TD>
-                <ProductName>{item.name}</ProductName>
-              </TD>
-              <TD>
+            <tr className={styles.tr} key={index}>
+              <td className={styles.td}>
+                <h3 className={styles.productName}>{item.name}</h3>
+              </td>
+              <td className={styles.td}>
                 <h4 className="price">{item.price.formatted}</h4>
-              </TD>
-              <TD>
+              </td>
+              <td className={styles.td}>
                 <strong>{item.quantity}</strong>
-              </TD>
-              <TD>{item.quantity! * Number(item.price.formatted)}</TD>
-            </TR>
+              </td>
+              <td className={styles.td}>{item.quantity! * Number(item.price.formatted)}</td>
+            </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
 
-      <Payment>
+      <section className={styles.payment}>
         <Card />
-        <div className="total">
+        <div className={styles.total}>
           <div className="caption">
             <p>
               <strong>Subtotal:</strong>
             </p>
             <p>Shipping:</p>
-            <p className="golden">Total:</p>
+            <p className={styles.golden}>Total:</p>
           </div>
-          <div className="num">
+          <div className={styles.num}>
             <p>
               <strong>{CartTotal(cart)}</strong>
             </p>
             <p>Free Shipping</p>
-            <p className="golden">{CartTotal(cart)}</p>
+            <p className={styles.golden}>{CartTotal(cart)}</p>
           </div>
         </div>
-      </Payment>
+      </section>
     </>
   );
 };

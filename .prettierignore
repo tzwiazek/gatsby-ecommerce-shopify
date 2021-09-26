@@ -2,3 +2,5 @@ node_modules
 gatsby-config.js
 tsconfig.json
 eslintrc.js
+gatsby-browser.js
+gatsby-ssr.js

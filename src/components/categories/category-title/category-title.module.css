@@ -1,0 +1,56 @@
+.headerTitleWrapper {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 25px 0;
+}
+
+.headerTitleContainer {
+  width: 100%;
+  text-align: center;
+}
+
+.headerTitle {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0 0 18px 0;
+  letter-spacing: 1.5px;
+  width: 100%;
+}
+
+.text {
+  letter-spacing: 0.5px;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: #7f7f7f;
+  width: 90%;
+  display: inline-block;
+}
+
+@media screen and (min-width: 1920) {
+  .text {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1440) {
+  .text {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 1024) {
+  .headerTitleWrapper {
+    padding: 50px 0;
+  }
+
+  .headerTitle {
+    letter-spacing: 1.5px;
+    font-weight: 300;
+    font-size: 1.8rem;
+  }
+
+  .text {
+    width: 75%;
+  }
+}

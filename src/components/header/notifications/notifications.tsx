@@ -3,15 +3,7 @@ import leftArrow from 'assets/img/icons/left-arrow-white.svg';
 import rightArrow from 'assets/img/icons/right-arrow-white.svg';
 import plus from 'assets/img/icons/plus.svg';
 import { isMobile } from 'react-device-detect';
-import {
-  HeaderSwipe,
-  SwipeWrap,
-  Notification,
-  Text,
-  NotificationLink,
-  Arrow,
-  ArrowIcon
-} from './notifications.styles';
+import * as styles from './notifications.module.css';
 
 export default function Notifications(): JSX.Element {
   const [isNotificationActive, setNotificationActive] = useState<boolean>(false);
@@ -22,7 +14,7 @@ export default function Notifications(): JSX.Element {
   let sliderPictureWidthAll: NodeListOf<Element>;
 
   useEffect(() => {
-    sliderPictureWidthAll = document.querySelectorAll(Notification);
+    sliderPictureWidthAll = document.querySelectorAll('.notification');
     sliderPictureWidth = (sliderPictureWidthAll[0] as HTMLElement).offsetWidth;
   });
 
@@ -31,17 +23,17 @@ export default function Notifications(): JSX.Element {
   }
 
   function previous(): void {
-    if (currentIndex >= 1) {
+    if (sliderPictureWidthAll && currentIndex >= 1) {
       setCurrentIndex(currentIndex - 1);
-      (document.querySelector(SwipeWrap) as HTMLElement).style.transform =
+      (document.querySelector('.swipeWrap') as HTMLElement).style.transform =
         'translateX(' + -(sliderPictureWidth * (currentIndex - 1)) + 'px)';
     }
   }
 
   function next(): void {
-    if (currentIndex < sliderPictureWidthAll.length - 1) {
+    if (sliderPictureWidthAll && currentIndex < sliderPictureWidthAll.length - 1) {
       setCurrentIndex(currentIndex + 1);
-      (document.querySelector(SwipeWrap) as HTMLElement).style.transform =
+      (document.querySelector('.swipeWrap') as HTMLElement).style.transform =
         'translateX(' + -(sliderPictureWidth * (currentIndex + 1)) + 'px)';
     }
   }
@@ -65,8 +57,9 @@ export default function Notifications(): JSX.Element {
   }
 
   return (
-    <HeaderSwipe>
-      <SwipeWrap
+    <div className={styles.headerSwipe}>
+      <div
+        className={`swipeWrap ${styles.swipeWrap}`}
         onTouchStart={(touchStartEvent: React.TouchEvent<HTMLDivElement>) =>
           handleTouchStart(touchStartEvent)
         }
@@ -74,67 +67,76 @@ export default function Notifications(): JSX.Element {
           handleTouchMove(touchMoveEvent)
         }
         onTouchEnd={() => handleTouchEnd()}>
-        <Notification showMore={isNotificationActive}>
+        <div
+          className={`notification ${styles.notification} ${
+            isNotificationActive ? styles.showMore : ''
+          }`}>
           {!isNotificationActive ? (
-            <Text>Lorem ipsum dolor sit amet 1</Text>
+            <span className={styles.text}>Lorem ipsum dolor sit amet 1</span>
           ) : (
-            <Text size="80vw">
+            <span className={`${styles.text} ${styles.opened}`}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
               incididunt
-            </Text>
+            </span>
           )}
-        </Notification>
-        <Notification showMore={isNotificationActive}>
+        </div>
+        <div
+          className={`notification ${styles.notification} ${
+            isNotificationActive ? styles.showMore : ''
+          }`}>
           {!isNotificationActive ? (
             <>
-              <Text>Lorem ipsum dolor sit amet + link</Text>
-              <NotificationLink href="#" target="_blank">
+              <span className={styles.text}>Lorem ipsum dolor sit amet + link</span>
+              <a className={styles.notificationLink} href="#" target="_blank">
                 Lorem ipsum dolor
-              </NotificationLink>
+              </a>
             </>
           ) : (
             <>
-              <Text size="80vw">
+              <span className={`${styles.text} ${styles.opened}`}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt
-              </Text>
-              <NotificationLink href="#" target="_blank">
+              </span>
+              <a className={styles.notificationLink} href="#" target="_blank">
                 Lorem ipsum dolor
-              </NotificationLink>
+              </a>
             </>
           )}
-        </Notification>
-        <Notification showMore={isNotificationActive}>
+        </div>
+        <div
+          className={`notification ${styles.notification} ${
+            isNotificationActive ? styles.showMore : ''
+          }`}>
           {!isNotificationActive ? (
-            <Text>Lorem ipsum dolor sit amet 3</Text>
+            <span className={styles.text}>Lorem ipsum dolor sit amet 3</span>
           ) : (
-            <Text size="80vw">
+            <span className={`${styles.text} ${styles.opened}`}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
               incididunt 3
-            </Text>
+            </span>
           )}
-        </Notification>
-      </SwipeWrap>
+        </div>
+      </div>
 
       {isMobile ? (
-        <Arrow type="right">
-          <ArrowIcon
+        <div className={`${styles.arrow} ${styles.right}`}>
+          <img
+            className={`${styles.arrowIcon} ${isNotificationActive ? styles.showMore : ''}`}
             src={plus}
             alt="show more notification"
             onClick={() => toggleNotification()}
-            showMore={isNotificationActive}
           />
-        </Arrow>
+        </div>
       ) : (
         <>
-          <Arrow type="left" onClick={() => previous()}>
-            <ArrowIcon src={leftArrow} alt="left arrow notification" />
-          </Arrow>
-          <Arrow type="right" onClick={() => next()}>
-            <ArrowIcon src={rightArrow} alt="right arrow notification" />
-          </Arrow>
+          <div className={`${styles.arrow} ${styles.left}`} onClick={() => previous()}>
+            <img className={styles.arrowIcon} src={leftArrow} alt="left arrow notification" />
+          </div>
+          <div className={`${styles.arrow} ${styles.right}`} onClick={() => next()}>
+            <img className={styles.arrowIcon} src={rightArrow} alt="right arrow notification" />
+          </div>
         </>
       )}
-    </HeaderSwipe>
+    </div>
   );
 }

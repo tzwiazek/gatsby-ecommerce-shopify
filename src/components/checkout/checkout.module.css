@@ -1,0 +1,85 @@
+.card {
+  margin-top: 20px;
+}
+
+.card input,
+.card button {
+  width: 100%;
+}
+
+.card button {
+  margin-top: 20px;
+}
+
+.card .emptyBtn {
+  margin-bottom: 30px;
+}
+
+.table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.tr {
+  text-align: center;
+}
+
+.th {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.td {
+  border-bottom: 1px solid #ccc;
+}
+
+.productName {
+  padding-top: 36px;
+  text-align: left;
+}
+
+.payment {
+  width: 94%;
+  margin-left: 2%;
+}
+
+.payment .total {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 100px;
+}
+
+.payment .golden {
+  background: #f2eee2;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.payment .num {
+  text-align: right;
+}
+
+.productImg {
+  float: left;
+  margin-right: 15px;
+  width: 100px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+}
+
+.success {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .payment {
+    width: 100%;
+    margin-left: 0%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 100px;
+  }
+}

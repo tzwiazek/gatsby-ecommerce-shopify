@@ -1,6 +1,11 @@
-const React = require("react")
-const { CartProvider } = require("./src/components/cart/cart-provider")
+const React = require('react');
+const { CartProvider } = require('./src/contexts/cart.context');
+const { ToggleProvider } = require('./src/contexts/toggle.context');
 
 exports.wrapRootElement = ({ element }) => {
-  return <CartProvider>{element}</CartProvider>
-}
+  return (
+    <ToggleProvider>
+      <CartProvider>{element}</CartProvider>
+    </ToggleProvider>
+  )
+};
