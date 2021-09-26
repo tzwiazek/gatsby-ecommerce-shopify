@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import SEO from 'src/components/seo';
+import { SEO } from 'src/components/seo';
 import Layout from 'src/components/layout/layout';
 import CartDisplay from 'src/components/checkout/checkout-cart';
 import { CartUIProvider, CartUIContext } from 'src/components/cart/cartUI';

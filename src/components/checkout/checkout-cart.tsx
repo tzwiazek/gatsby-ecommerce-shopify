@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'gatsby';
 import { CartContext, CartContextType } from 'src/contexts/cart.context';
 import Card from './checkout-payment';
-import Seo from 'src/components/seo';
+import { SEO } from 'src/components/seo';
 import { CartTotal } from 'src/shared/hooks/cart-total';
 import { CartInterface } from 'src/shared/interfaces/components/cart.interface';
 import * as styles from './checkout.module.css';
@@ -28,7 +28,7 @@ const cartEmpty = () => {
 const CheckoutDisplay = (cart: CartInterface[]) => {
   return (
     <>
-      <Seo title="Checkout page" />
+      <SEO title="Checkout page" />
       <table className={styles.table}>
         <tbody>
           <tr className={styles.tr}>

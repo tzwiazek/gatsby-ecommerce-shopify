@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from 'src/components/layout/layout';
 import CategoryTitle from 'src/components/categories/category-title/category-title';
-import Seo from 'src/components/seo';
+import { SEO } from 'src/components/seo';
 import { CartInterface } from 'src/shared/interfaces/components/cart.interface';
 import * as styles from './category-page.module.css';
 import Product from 'src/components/products/product/product';
@@ -16,7 +16,7 @@ export default function CategoryPage({
 
   return (
     <Layout>
-      <Seo title={`All ${category.name} SEO title`} />
+      <SEO title={`All ${category.name} SEO title`} />
 
       <div className={styles.categoryContainer}>
         <CategoryTitle
