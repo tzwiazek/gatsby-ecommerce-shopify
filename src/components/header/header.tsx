@@ -39,7 +39,7 @@ export default function Header(): JSX.Element {
         )}
       </nav>
 
-      <Link to="/">
+      <Link to="/" className={styles.logoLink}>
         <img className={styles.logoImg} src={logoSVG} alt="logo" />
       </Link>
 

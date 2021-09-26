@@ -11,7 +11,7 @@
   text-align: center;
   font-size: 1.4rem;
   letter-spacing: 1.5px;
-  margin: 30px 0;
+  margin: 37px 0;
 }
 
 .productsContainer {
@@ -21,6 +21,12 @@
   margin: auto;
 }
 
+@media screen and (min-width: 525px) {
+  .collectionTitle {
+    font-size: 1.6rem;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .collectionTitle {
     font-size: 1.8rem;
@@ -28,11 +34,5 @@
 
   .productsContainer {
     max-width: 1440px;
-  }
-}
-
-@media screen and (min-width: 525px) {
-  .collectionTitle {
-    font-size: 1.6rem;
   }
 }
