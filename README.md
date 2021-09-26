@@ -1,5 +1,7 @@
 ## 🚀 Quick start
 
+https://flamboyant-hodgkin-db04be.netlify.app/
+
 Optimized version of https://github.com/tzwiazek/gatsby-ecommerce with shopify as backend
 
 ## CommerceJS Before changes vs after changes
